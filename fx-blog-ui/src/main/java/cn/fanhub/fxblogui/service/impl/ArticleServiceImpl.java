@@ -1,11 +1,12 @@
 package cn.fanhub.fxblogui.service.impl;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.entity.Categories;
+import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.repository.ArticleRepository;
-import cn.fanhub.fxblogui.repository.CategoriesRepository;
-import cn.fanhub.fxblogui.repository.DiscussRepository;
 import cn.fanhub.fxblogui.repository.TagRepository;
 import cn.fanhub.fxblogui.service.ArticleService;
+import cn.fanhub.fxblogui.service.CategoriesService;
 import cn.fanhub.fxblogui.util.IdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -21,10 +22,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Autowired
-    private CategoriesRepository categoriesRepository;
-
-    @Autowired
-    private DiscussRepository discussRepository;
+    private CategoriesService categoriesService;
 
     @Autowired
     private TagRepository tagRepository;
@@ -40,7 +38,7 @@ public class ArticleServiceImpl implements ArticleService {
         tagRepository.save(
                 article.getTags().stream().peek(tag -> tag.getArticles().add(articleId)).collect(Collectors.toList())
         );
-        categoriesRepository.save(
+        categoriesService.save(
                 article.getCategories().stream().peek(categories -> categories.getArticles().add(articleId)).collect(Collectors.toList())
         );
 
@@ -49,6 +47,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article update(Article article) {
+        // todo 有性能问题，不该更新的也会更新
+        tagRepository.save(
+                article.getTags().stream().peek(tag -> tag.getArticles().add(article.getId())).collect(Collectors.toList())
+        );
+        categoriesService.save(
+                article.getCategories().stream().peek(categories -> categories.getArticles().add(article.getId())).collect(Collectors.toList())
+        );
         return articleRepository.save(article);
     }
 
@@ -70,5 +75,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getAll() {
         return articleRepository.findAll();
+    }
+
+    @Override
+    public List<Article> getByTagName(String tagName) {
+        Tag tag = tagRepository.getTagByName(tagName);
+        return (List<Article>) articleRepository.findAll(tag.getArticles());
+    }
+
+    @Override
+    public List<Article> getByCategoriesName(String categoriesName) {
+        Categories categories = categoriesService.getByName(categoriesName);
+        return (List<Article>) articleRepository.findAll(categories.getArticles());
     }
 }

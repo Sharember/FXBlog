@@ -15,4 +15,8 @@ public interface ArticleService {
     Article getOne(long id);
 
     List<Article> getAll();
+
+    List<Article> getByTagName(String tagName);
+
+    List<Article> getByCategoriesName(String categoriesName);
 }
