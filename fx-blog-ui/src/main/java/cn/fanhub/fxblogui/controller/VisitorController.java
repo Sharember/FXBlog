@@ -10,6 +10,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
+/**
+ * @author chengfan
+ * @date 2018-2-8 22:16:32
+ */
 @RequestMapping("/visit")
 @RestController
 public class VisitorController {

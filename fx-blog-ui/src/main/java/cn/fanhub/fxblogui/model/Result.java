@@ -42,11 +42,11 @@ public class Result<T> {
         if (value == null) {
             return ofNull();
         }
-        return new Result<T>(value, true);
+        return new Result<>(value, true);
     }
 
     public static <T> Result<T> errorMessage(String errorMessage) {
-        return new Result<T>(errorMessage);
+        return new Result<>(errorMessage);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

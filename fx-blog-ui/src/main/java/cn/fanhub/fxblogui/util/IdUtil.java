@@ -7,6 +7,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+/**
+ * @author chengfan
+ * @date 2018-2-8 22:19:00
+ */
 public class IdUtil {
     /**
      * 获取下一个自增ID

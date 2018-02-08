@@ -2,21 +2,10 @@ package cn.fanhub.fxblogui.service;
 
 import cn.fanhub.fxblogui.entity.Article;
 
-import java.util.List;
-
-public interface ArticleService {
-
-    Article save(Article article);
-
-    Article update(Article article);
-
-    void delete(Article article);
-
-    Article getOne(long id);
-
-    List<Article> getAll();
-
-    List<Article> getByTagName(String tagName);
-
-    List<Article> getByCategoriesName(String categoriesName);
+/**
+ * @author chengfan
+ * @date 2018-2-8 22:18:40
+ */
+public interface ArticleService extends BaseService<Article, Long>{
+    
 }

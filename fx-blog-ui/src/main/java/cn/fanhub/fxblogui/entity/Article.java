@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author chengfan
+ * @date 2018-2-8 22:16:58
+ */
 @Data
 @ToString
 public class Article {
