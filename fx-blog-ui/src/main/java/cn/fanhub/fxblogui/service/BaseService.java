@@ -66,10 +66,10 @@ public interface BaseService<T, ID extends Serializable>{
     /**
      * Gets all.
      *
-     * @param articles the articles
+     * @param ids the ids
      * @return the all
      */
-    List<T> getAll(List<ID> articles);
+    List<T> getAll(List<ID> ids);
 
 
 }

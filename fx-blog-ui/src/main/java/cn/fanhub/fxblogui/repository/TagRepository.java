@@ -8,11 +8,4 @@ import cn.fanhub.fxblogui.entity.Tag;
  */
 public interface TagRepository extends BaseRepository<Tag, Long> {
 
-    /**
-     * Gets tag by name.
-     *
-     * @param name the name
-     * @return the tag by name
-     */
-    Tag getTagByName(String name);
 }

@@ -23,10 +23,9 @@ public class SaveEventListener extends AbstractMongoEventListener<Object> {
     private MongoTemplate mongo;
 
     /**
-     * Captures {@link BeforeConvertEvent}.
+     * 设置自增 id 以及自动填写插入和修改时间
      *
-     * @param event never {@literal null}.
-     * @since 1.8
+     * @param event the event
      */
     @Override
     public void onBeforeConvert(BeforeConvertEvent<Object> event) {
@@ -42,36 +41,17 @@ public class SaveEventListener extends AbstractMongoEventListener<Object> {
                         // 判断注解的字段是否为number类型且值是否等于0.如果大于0说明有ID不需要生成ID
                         // 设置自增ID
                         field.set(source, IdUtil.getNextIdAndUpdate(source.getClass().getSimpleName(), mongo));
-                        logger.debug("集合的ID为======================="+ source);
+                        logger.debug("集合的ID为=======================" + source);
                     }
                     if (field.isAnnotationPresent(CreateTime.class) && field.get(source) == null) {
                         field.set(source, new Date());
                     }
                     if (field.isAnnotationPresent(UpdateTime.class)) {
                         field.set(source, new Date());
+
                     }
                 }
             });
         }
     }
-
-    /**
-     * @since 1.7
-     */
-    /*@Override
-    public void onBeforeConvert(final Object source) {
-        if (source != ) {
-            ReflectionUtils.doWithFields(source.getClass(), new ReflectionUtils.FieldCallback() {
-                public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-                    ReflectionUtils.makeAccessible(field);
-                    // 如果字段添加了我们自定义的AutoIncKey注解
-                    if (field.isAnnotationPresent(AutoIncKey.class)) {
-                        // 设置自增ID
-                        field.set(source, getNextId(source.getClass().getSimpleName()));
-                    }
-                }
-            });
-        }
-    }*/
-
 }

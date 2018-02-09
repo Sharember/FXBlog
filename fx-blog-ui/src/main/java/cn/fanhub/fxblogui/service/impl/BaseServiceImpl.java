@@ -2,12 +2,10 @@ package cn.fanhub.fxblogui.service.impl;
 
 import cn.fanhub.fxblogui.repository.BaseRepository;
 import cn.fanhub.fxblogui.service.BaseService;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 
 /**
