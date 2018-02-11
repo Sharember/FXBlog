@@ -1,12 +1,30 @@
 import React from 'react';
-import { Router, Route } from 'dva/router';
-import IndexPage from './routes/IndexPage';
+import { routerRedux, Route, Switch } from 'dva/router';
+import { Spin } from 'antd';
 
-function RouterConfig({ history }) {
+import dynamic from 'dva/dynamic';
+import { getRouterData } from './common/router';
+
+import styles from './index.less';
+
+const { ConnectedRouter } = routerRedux;
+
+dynamic.setDefaultLoadingComponent(() => {
+  return <Spin size="large" className={styles.globalSpin} />;
+});
+
+function RouterConfig({ history, app }) {
+  const routerData = getRouterData(app);
+  const BasicLayout = routerData['/'].component;
   return (
-    <Router history={history}>
-      <Route path="/" component={IndexPage} />
-    </Router>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route
+          path="/"
+          render={props => <BasicLayout {...props} />}
+        />
+      </Switch>
+    </ConnectedRouter>
   );
 }
 

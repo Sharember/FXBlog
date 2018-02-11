@@ -15,6 +15,7 @@ public class Menu extends BaseEntity {
     private String name;
     private Categories categories;
     private Tag tag;
+    private String icon;
 
     @DBRef
     private List<Menu> menus = new ArrayList<>();

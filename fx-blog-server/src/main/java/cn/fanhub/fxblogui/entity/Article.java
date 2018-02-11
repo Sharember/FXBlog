@@ -23,6 +23,8 @@ public class Article extends BaseEntity{
 
     private String content;
 
+    private String digest;
+
     @DBRef
     private List<Categories> categories = new ArrayList<>();
 
