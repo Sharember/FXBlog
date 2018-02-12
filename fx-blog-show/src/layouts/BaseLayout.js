@@ -9,14 +9,38 @@ import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
-
+import CardSider from '../components/CardSider';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import { getMenuData } from '../common/menu';
 
 import logo from '../assets/logo.jpg';
+import Card from '_antd@3.2.0@antd/lib/card';
+
 
 const { Content } = Layout;
+
+const data = [
+  {
+    title: '热门文章',
+  },
+  {
+    title: '最新文章',
+  },
+  {
+    title: 'Title 3',
+  },
+  {
+    title: 'Title 4',
+  },
+  {
+    title: 'Title 5',
+  },
+  {
+    title: 'Title 6',
+  },
+];
+
 
 /**
  * 根据菜单取得重定向地址.
@@ -122,28 +146,33 @@ class BaseLayout extends React.PureComponent {
             location={location}
             isMobile={this.state.isMobile}
           />
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {
-                redirectData.map(item =>
-                  <Redirect key={item.from} exact from={item.from} to={item.to} />
-                )
-              }
-              {
-                getRoutes(match.path, routerData).map(item =>
-                  (
-                    <Route
-                      key={item}
-                      path={item.path}
-                      render={props => <item.component {...props} />}
-                    />
+          <Layout>
+            <Content style={{ margin: '4% 10% 0', height: '100%' }}>
+              <Switch>
+                {
+                  redirectData.map(item =>
+                    <Redirect key={item.from} exact from={item.from} to={item.to} />
                   )
-                )
-              }
-              <Redirect exact from="/" to={bashRedirect} />
-              <Route render={NotFound} />
-            </Switch>
-          </Content>
+                }
+                {
+                  getRoutes(match.path, routerData).map(item =>
+                    (
+                      <Route
+                        key={item}
+                        path={item.path}
+                        render={props => <item.component {...props} />}
+                      />
+                    )
+                  )
+                }
+                <Redirect exact from="/" to={bashRedirect} />
+                <Route render={NotFound} />
+              </Switch>
+            </Content>
+            <CardSider
+              dataSource={data}
+            ></CardSider>
+          </Layout>
           <GlobalFooter
             links={[{
               key: '简书 主页',
