@@ -25,6 +25,10 @@ public class Article extends BaseEntity{
 
     private String digest;
 
+    private long likeNum;
+
+    private String firstImgUrl;
+
     @DBRef
     private List<Categories> categories = new ArrayList<>();
 

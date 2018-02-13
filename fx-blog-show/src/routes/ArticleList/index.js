@@ -12,16 +12,25 @@ for (let i = 0; i < 5; i++) {
     content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
 }
-@connect(({ articles, loading }) => ({
-  articles,
-  loading: loading.effects['articles/fetch'],
+@connect(({ article, loading }) => ({
+  article,
+  loading: loading.effects['article/fetch'],
 }))
 export default class ArticleList extends Component {
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'article/fetch',
+      payload: 0,
+    });
+  }
+
   render() {
+    const { article } = this.props;
+    const { articleDigists } = article;
     return (
-      // <div>eee</div>
       <ArticleDigest
-        dataSource={listData}
+        dataSource={articleDigists}
       >
 
       </ArticleDigest>

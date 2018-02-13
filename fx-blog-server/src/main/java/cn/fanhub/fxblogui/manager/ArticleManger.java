@@ -1,6 +1,8 @@
 package cn.fanhub.fxblogui.manager;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.model.ArticleDigestVO;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -63,4 +65,12 @@ public interface ArticleManger {
      * @return the article
      */
     Article save(Article article);
+
+    /**
+     * Gets article digests.
+     *
+     * @param pageable the pageable
+     * @return the article digests
+     */
+    List<ArticleDigestVO> getArticleDigests(Pageable pageable);
 }

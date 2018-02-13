@@ -15,7 +15,7 @@ import java.util.List;
 public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<T, ID>{
 
     @Autowired
-    private BaseRepository<T, ID> baseRepository;
+    protected BaseRepository<T, ID> baseRepository;
 
     /**
      * Save t.

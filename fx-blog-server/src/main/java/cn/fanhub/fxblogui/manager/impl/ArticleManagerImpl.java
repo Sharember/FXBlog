@@ -4,11 +4,14 @@ import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.CategoriesService;
 import cn.fanhub.fxblogui.service.TagService;
 import cn.fanhub.fxblogui.util.IdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
@@ -118,5 +121,17 @@ public class ArticleManagerImpl implements ArticleManger {
     @Override
     public Article save(Article article) {
         return articleService.update(article);
+    }
+
+    /**
+     * Gets article digests.
+     *
+     * @param pageable the pageable
+     * @return the article digests
+     */
+    @Override
+    public List<ArticleDigestVO> getArticleDigests(Pageable pageable) {
+        Page<Article> page = articleService.getPage(pageable);
+        return page.getContent().stream().map(ArticleDigestVO::convertToArticleDigestVO).collect(Collectors.toList());
     }
 }

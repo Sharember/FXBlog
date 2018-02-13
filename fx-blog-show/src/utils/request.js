@@ -22,6 +22,7 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  url = 'http://localhost:5210' + url;
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)

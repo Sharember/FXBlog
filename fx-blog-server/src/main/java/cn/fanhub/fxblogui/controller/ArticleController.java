@@ -2,8 +2,10 @@ package cn.fanhub.fxblogui.controller;
 
 import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,6 +67,18 @@ public class ArticleController {
     @GetMapping("/categories/{categoriesName}")
     public Result<List<Article>> getArticlesByCategories(@PathVariable String categoriesName) {
         return Result.of(articleManger.getByCategoriesName(categoriesName));
+    }
+
+    /**
+     * Gets article digests.
+     *
+     * @param pageNum the page num
+     * @return the article digests
+     */
+    @GetMapping("/digests/page/{pageNum}")
+    public Result<List<ArticleDigestVO>> getArticleDigests(@PathVariable int pageNum) {
+        PageRequest pageRequest = new PageRequest(pageNum, 10);
+        return Result.of(articleManger.getArticleDigests(pageRequest));
     }
 
     /**

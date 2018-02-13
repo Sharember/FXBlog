@@ -2,6 +2,8 @@ package cn.fanhub.fxblogui.service.impl;
 
 import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.service.ArticleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,4 +12,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implements ArticleService{
+
+    @Override
+    public Page<Article> getPage(Pageable pageable) {
+        return super.baseRepository.findAll(pageable);
+    }
 }

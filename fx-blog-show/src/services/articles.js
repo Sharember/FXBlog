@@ -1,5 +1,5 @@
 import request from '../utils/request';
 
-export function getArticleDigests() {
-  //return request('/api/users');
+export function getArticleDigests(page) {
+  return request('/article/digests/page/' + page);
 }
