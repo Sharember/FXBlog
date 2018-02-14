@@ -2,6 +2,7 @@ package cn.fanhub.fxblogui.controller;
 
 import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class ArticleController {
      * @return the article by name
      */
     @GetMapping("/name/{articleName}")
-    public Result<Article> getArticleByName(@PathVariable String articleName) {
+    public Result<ArticleDetailVO> getArticleByName(@PathVariable String articleName) {
 
         return Result.of(articleManger.getByName(articleName));
     }

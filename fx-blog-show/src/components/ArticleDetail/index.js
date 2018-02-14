@@ -14,7 +14,6 @@ export default class ArticleDetail extends PureComponent {
           createTime={data.createTime}
           categories={data.categories}
           tags={data.tags}
-          discusses={data.discusses}
           visitNum={data.visitNum}
         />
         <hr />
@@ -22,7 +21,10 @@ export default class ArticleDetail extends PureComponent {
           content={data.content}
         />
         <hr />
-        <ArticleFooter /> 
+        <ArticleFooter 
+          lastArticle={data.lastArticle}
+          nextArticle={data.nextArticle}
+        /> 
       </div>
     )
   }

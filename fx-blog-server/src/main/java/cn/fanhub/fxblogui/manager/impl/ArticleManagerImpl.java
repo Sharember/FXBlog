@@ -4,6 +4,7 @@ import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.CategoriesService;
@@ -142,7 +143,12 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by name
      */
     @Override
-    public Article getByName(String articleName) {
-        return articleService.getByName(articleName);
+    public ArticleDetailVO getByName(String articleName) {
+        Article article = articleService.getByName(articleName);
+        ArticleDetailVO detailVO = ArticleDetailVO.convertToArticleDigestVO(article);
+        //todo 这里有性能问题，应该只查出 name 就行，但是 getNameById 方法报错，后面再研究
+        detailVO.setLastArticle(articleService.getOne(article.getId() - 1).getName());
+        detailVO.setNextArticle(articleService.getOne(article.getId() + 1).getName());
+        return detailVO;
     }
 }

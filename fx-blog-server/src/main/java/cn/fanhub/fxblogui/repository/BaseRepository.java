@@ -62,4 +62,12 @@ public interface BaseRepository<M, ID extends Serializable> extends PagingAndSor
      * @return the by name
      */
     M getByName(String name);
+
+    /**
+     * Gets name by id.
+     *
+     * @param id the id
+     * @return the name by id
+     */
+    String getNameById(ID id);
 }

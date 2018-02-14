@@ -1,6 +1,7 @@
 package cn.fanhub.fxblogui.manager;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import org.springframework.data.domain.Pageable;
 
@@ -80,5 +81,5 @@ public interface ArticleManger {
      * @param articleName the article name 
      * @return the by name
      */
-    Article getByName(String articleName);
+    ArticleDetailVO getByName(String articleName);
 }

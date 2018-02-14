@@ -17,4 +17,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implement
     public Page<Article> getPage(Pageable pageable) {
         return super.baseRepository.findAll(pageable);
     }
+
+    @Override
+    public String getNameById(long id) {
+        return super.baseRepository.getNameById(id);
+    }
 }

@@ -16,6 +16,15 @@ export default class Article extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.location.pathname !== nextProps.location.pathname) {
+      this.props.dispatch({
+        type: 'article/fetchCurrentArticle',
+        payload: nextProps.location.pathname.split('/')[3],
+      });
+    }
+  }
+
   render() {
     const { article } = this.props;
     const { currentArticle } = article;

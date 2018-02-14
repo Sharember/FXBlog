@@ -10,4 +10,6 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ArticleService extends BaseService<Article, Long>{
     Page<Article> getPage(Pageable pageable);
+
+    String getNameById(long id);
 }
