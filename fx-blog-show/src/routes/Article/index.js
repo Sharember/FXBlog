@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import { connect } from 'dva';
+import ArticleDetail from '../../components/ArticleDetail'
 
 @connect(({ article, loading }) => ({
   article,
@@ -20,9 +21,17 @@ export default class Article extends Component {
     const { currentArticle } = article;
     return (
       <div>
-       
-        {currentArticle.name}
+        {
+          currentArticle.name ? 
+            <ArticleDetail
+              data={currentArticle}
+            >
+            </ArticleDetail>
+          :
+          null
+        }
       </div>
+      
     )
   }
 }
