@@ -134,4 +134,15 @@ public class ArticleManagerImpl implements ArticleManger {
         Page<Article> page = articleService.getPage(pageable);
         return page.getContent().stream().map(ArticleDigestVO::convertToArticleDigestVO).collect(Collectors.toList());
     }
+
+    /**
+     * Gets by name.
+     *
+     * @param articleName the article name
+     * @return the by name
+     */
+    @Override
+    public Article getByName(String articleName) {
+        return articleService.getByName(articleName);
+    }
 }

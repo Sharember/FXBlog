@@ -73,4 +73,12 @@ public interface ArticleManger {
      * @return the article digests
      */
     List<ArticleDigestVO> getArticleDigests(Pageable pageable);
+
+    /**
+     * Gets by name.
+     *
+     * @param articleName the article name 
+     * @return the by name
+     */
+    Article getByName(String articleName);
 }

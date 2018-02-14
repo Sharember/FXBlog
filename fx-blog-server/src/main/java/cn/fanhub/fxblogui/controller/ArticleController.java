@@ -82,6 +82,18 @@ public class ArticleController {
     }
 
     /**
+     * Gets article by name.
+     *
+     * @param articleName the article name
+     * @return the article by name
+     */
+    @GetMapping("/name/{articleName}")
+    public Result<Article> getArticleByName(@PathVariable String articleName) {
+
+        return Result.of(articleManger.getByName(articleName));
+    }
+
+    /**
      * Update article result.
      *
      * @param article the article

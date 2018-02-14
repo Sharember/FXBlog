@@ -14,7 +14,7 @@ const { Header } = Layout;
 
 export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
-    this.triggerResizeEvent.cancel();
+    //this.triggerResizeEvent.cancel();
   }
 
   render() {

@@ -17,6 +17,7 @@
     "fastclick": "^1.0.6",
     "lodash": "^4.17.4",
     "lodash-decorators": "^4.4.1",
+    "marked": "^0.3.12",
     "moment": "^2.19.1",
     "qs": "^6.5.0",
     "rc-drawer-menu": "^0.5.0",

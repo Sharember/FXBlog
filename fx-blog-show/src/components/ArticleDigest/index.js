@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { List, Avatar, Icon } from 'antd';
-import styles from './index.less';
-
+import { List, Icon } from 'antd';
+import { Link } from 'dva/router';
+import marked from 'marked';
 
 
 const IconText = ({ type, text }) => (
@@ -10,6 +10,15 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
+const Digest = ({ digest }) => (
+  <div
+    dangerouslySetInnerHTML={{
+      __html: marked(digest, {sanitize: true})
+    }}>
+  </div>
+)
+  
+
 
 export default class ArticleDigest extends PureComponent {
 
@@ -40,8 +49,8 @@ export default class ArticleDigest extends PureComponent {
           >
             <List.Item.Meta
               //avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.url}>{item.name}</a>}
-              description={item.digest}
+              title={<Link to={`/article/name/${item.name}`}>{item.name}</Link>}
+              description={<Digest digest={item.digest} />}
             />
           </List.Item>
         )}

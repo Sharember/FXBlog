@@ -1,10 +1,14 @@
-import { getArticleDigests } from '../services/articles';
+import { 
+  getArticleDigests,
+  getArticleByName
+} from '../services/articles';
 
 export default {
   namespace: 'article',
 
   state: {
     articleDigists: [],
+    currentArticle: {},
   },
 
   effects: {
@@ -18,6 +22,16 @@ export default {
         });
       }
     },
+    //payload: articleName
+    *fetchCurrentArticle({ payload }, { call, put }) {
+      const response = yield call(getArticleByName, payload);
+      if (response.data.success) {
+        yield put({
+          type: 'getArticle',
+          payload: response.data.value,
+        });
+      }
+    }
   },
 
   reducers: {
@@ -27,5 +41,11 @@ export default {
         articleDigists: payload,
       };
     },
+    getArticle(state, { payload }) {
+      return {
+        ...state,
+        currentArticle: payload,
+      };
+    }
   }
 }
