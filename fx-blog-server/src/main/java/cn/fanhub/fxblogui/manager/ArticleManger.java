@@ -59,13 +59,6 @@ public interface ArticleManger {
      */
     Article update(Article article);
 
-    /**
-     * Save article.
-     *
-     * @param article the article
-     * @return the article
-     */
-    Article save(Article article);
 
     /**
      * Gets article digests.

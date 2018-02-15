@@ -51,8 +51,19 @@ export default class ArticleFooter extends PureComponent {
     return (
       <div className={styles.footer}>
         <div>
-          <Link to={`/article/name/${lastArticle}`}>上一篇: {lastArticle}</Link>  
-          <Link to={`/article/name/${nextArticle}`} style={{ float: "right" }}>下一篇: {nextArticle}</Link>
+          {
+            lastArticle === "无" ?
+              <span>上一篇: 已经是第一篇啦</span>
+            :
+              <Link to={`/article/name/${lastArticle}`}>上一篇: {lastArticle}</Link>  
+          }
+          {
+            nextArticle === "无" ?
+              <span>下一篇: 已经是最后一篇啦</span>
+            :
+              <Link to={`/article/name/${nextArticle}`} style={{ float: "right" }}>下一篇: {nextArticle}</Link>
+          }
+          
         </div>
         <div id="SOHUCS"></div> 
       </div>

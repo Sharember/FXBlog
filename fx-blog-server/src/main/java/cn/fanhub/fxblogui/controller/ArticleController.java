@@ -113,6 +113,6 @@ public class ArticleController {
      */
     @PostMapping
     public Result<Article> add(@RequestBody Article article){
-        return Result.of(articleManger.save(article));
+        return Result.of(articleManger.saveArticle(article));
     }
 }

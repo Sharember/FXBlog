@@ -353,7 +353,7 @@ public class FxBlogServerApplicationTests {
 					+ "\n"
 					+ "\n");
 
-			articleManger.save(article);
+			articleManger.saveArticle(article);
 		}
 	}
 

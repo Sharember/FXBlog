@@ -37,4 +37,11 @@ public class Article extends BaseEntity{
 
     @DBRef
     private List<Discuss> discusses = new ArrayList<>();
+
+    public Article() {
+    }
+
+    public Article(String name) {
+        this.name = name;
+    }
 }

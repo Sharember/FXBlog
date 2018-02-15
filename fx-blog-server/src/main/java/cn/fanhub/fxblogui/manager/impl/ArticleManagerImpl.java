@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -114,17 +115,6 @@ public class ArticleManagerImpl implements ArticleManger {
     }
 
     /**
-     * Save article.
-     *
-     * @param article the article
-     * @return the article
-     */
-    @Override
-    public Article save(Article article) {
-        return articleService.update(article);
-    }
-
-    /**
      * Gets article digests.
      *
      * @param pageable the pageable
@@ -147,8 +137,14 @@ public class ArticleManagerImpl implements ArticleManger {
         Article article = articleService.getByName(articleName);
         ArticleDetailVO detailVO = ArticleDetailVO.convertToArticleDigestVO(article);
         //todo 这里有性能问题，应该只查出 name 就行，但是 getNameById 方法报错，后面再研究
-        detailVO.setLastArticle(articleService.getOne(article.getId() - 1).getName());
-        detailVO.setNextArticle(articleService.getOne(article.getId() + 1).getName());
+        detailVO.setLastArticle(Optional
+                .ofNullable(articleService.getOne(article.getId() - 1))
+                .orElse(new Article("无"))
+                .getName());
+        detailVO.setNextArticle(Optional
+                .ofNullable(articleService.getOne(article.getId() + 1))
+                .orElse(new Article("无"))
+                .getName());
         return detailVO;
     }
 }

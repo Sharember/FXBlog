@@ -14,8 +14,8 @@ export default class ArticleHeader extends PureComponent {
         <h1 className={styles.auto} >{name}</h1>
         <span className={styles.auto} >
           <span className={styles.spanType} ><Icon type="clock-circle-o" /> {date.toLocaleDateString()} </span>
-          <span className={styles.spanType} ><Icon type="folder" /> {categories.length > 1 ? categories.map(item => <Link to={`/categories/${item.name}`} key={item} />) : "无"}</span>
-          <span className={styles.spanType} ><Icon type="tags-o" /> {tags.length > 1 ? tags.map(item => <Link to={`/tag/${item.name}`} key={item} />) : "无"}</span>
+          <span className={styles.spanType} ><Icon type="folder" /> {categories[0].id ? categories.map(item => <Link to={`/categories/name/${item.name}`} key={item} >{item.name} </Link>) : "无"}</span>
+          <span className={styles.spanType} ><Icon type="tags-o" /> {tags[0].id ? tags.map(item => <Link to={`/tag/name/${item.name}`} key={item} >{item.name} </Link>) : "无"}</span>
           {/* <span className={styles.spanType} ><Icon type="message" /> {discusses ? discusses.length : "无"}</span> */}
           <span className={styles.spanType} ><Icon type="eye-o" /> {visitNum}</span>
         </span>
