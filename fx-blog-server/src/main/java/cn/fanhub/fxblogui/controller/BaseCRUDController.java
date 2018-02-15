@@ -23,14 +23,19 @@ public abstract class BaseCRUDController <T, ID extends Serializable>{
     protected BaseService<T, ID> baseService;
 
     /**
-     * Gets article.
+     * Gets By Id.
      *
      * @param id the id
      * @return the article
      */
     @GetMapping("/{id}")
-    public Result<T> getArticle(@PathVariable ID id) {
+    public Result<T> getById(@PathVariable ID id) {
         return Result.of(baseService.getOne(id));
+    }
+
+    @GetMapping("/name/{name}")
+    public Result<T> getByName(@PathVariable String name) {
+        return Result.of(baseService.getByName(name));
     }
 
     /**

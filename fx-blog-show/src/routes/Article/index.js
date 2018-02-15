@@ -26,13 +26,14 @@ export default class Article extends Component {
   }
 
   render() {
-    const { article } = this.props;
+    const { article, loading } = this.props;
     const { currentArticle } = article;
     return (
       <div>
         {
           currentArticle.name ? 
             <ArticleDetail
+              loading={loading}
               data={currentArticle}
             >
             </ArticleDetail>

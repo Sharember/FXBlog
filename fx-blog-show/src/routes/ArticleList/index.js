@@ -17,10 +17,11 @@ export default class ArticleList extends Component {
   }
 
   render() {
-    const { article } = this.props;
+    const { article, loading } = this.props;
     const { articleDigists } = article;
     return (
       <ArticleDigest
+        loading={loading}
         dataSource={articleDigists}
       >
 

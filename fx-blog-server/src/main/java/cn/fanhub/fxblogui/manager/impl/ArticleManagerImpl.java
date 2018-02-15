@@ -77,9 +77,12 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by categories name
      */
     @Override
-    public List<Article> getByCategoriesName(String categoriesName) {
+    public List<ArticleDigestVO> getByCategoriesName(String categoriesName) {
         Categories categories = categoriesService.getByName(categoriesName);
-        return articleService.getAll(categories.getArticles());
+        return articleService.getAll(categories.getArticles())
+                .stream()
+                .map(ArticleDigestVO::convertToArticleDigestVO)
+                .collect(Collectors.toList());
     }
 
     /**

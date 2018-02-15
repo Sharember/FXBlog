@@ -21,25 +21,26 @@ const Digest = ({ digest }) => (
 
 
 export default class ArticleDigest extends PureComponent {
-
-  // constructor(props) {
-  //   super(props);
-  //   // const pagination = {
-  //   //   pageSize: 10,
-  //   //   current: 1,
-  //   //   total: listData.length,
-  //   //   onChange: (() => {}),
-  //   // };
-  // }
   
   render() {
-    const { dataSource } = this.props;
-   
+    const { dataSource, loading } = this.props;
+    const pagination = {
+      pageSize: 10,
+      current: 1,
+      // todo get article num
+      total: 20,
+      onChange: (() => {
+        // todo get net page
+      }),
+    };
+    console.log(dataSource);
+
     return (
       <List
         itemLayout="vertical"
         size="large"
-        //pagination={pagination}
+        pagination={pagination}
+        loading={loading}
         dataSource={dataSource}
         renderItem={item => (
           <List.Item

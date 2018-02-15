@@ -34,7 +34,7 @@ public interface ArticleManger {
      * @param categoriesName the categories name
      * @return the by categories name
      */
-    List<Article> getByCategoriesName(String categoriesName);
+    List<ArticleDigestVO> getByCategoriesName(String categoriesName);
 
     /**
      * Gets one.
