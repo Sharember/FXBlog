@@ -75,4 +75,18 @@ public interface ArticleManger {
      * @return the by name
      */
     ArticleDetailVO getByName(String articleName);
+
+    /**
+     * Like.
+     *
+     * @param name the name
+     */
+    void like(String name);
+
+    /**
+     * Visit.
+     *
+     * @param name the name
+     */
+    void visit(String name);
 }

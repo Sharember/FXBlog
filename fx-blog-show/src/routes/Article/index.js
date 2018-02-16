@@ -2,6 +2,10 @@ import React, { Component }  from 'react';
 import { connect } from 'dva';
 import ArticleDetail from '../../components/ArticleDetail'
 
+import { 
+  like,
+} from '../../services/articles';
+
 @connect(({ article, loading }) => ({
   article,
   loading: loading.effects['article/fetchCurrentArticle'],
@@ -25,6 +29,12 @@ export default class Article extends Component {
     }
   }
 
+  onLike = () => {
+    const { article} = this.props;
+    const { currentArticle } = article;
+    like(currentArticle.name)
+  }
+
   render() {
     const { article, loading } = this.props;
     const { currentArticle } = article;
@@ -34,6 +44,7 @@ export default class Article extends Component {
           currentArticle.name ? 
             <ArticleDetail
               loading={loading}
+              onLike={this.onLike}
               data={currentArticle}
             >
             </ArticleDetail>

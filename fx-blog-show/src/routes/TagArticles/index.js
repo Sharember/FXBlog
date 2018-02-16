@@ -19,7 +19,6 @@ export default class TagArticles extends Component {
   render() {
     const { article, loading } = this.props;
     const { articleDigists } = article;
-    //console.log(categoriesInfo)
     return (
       <ArticleDigest
         loading={loading}

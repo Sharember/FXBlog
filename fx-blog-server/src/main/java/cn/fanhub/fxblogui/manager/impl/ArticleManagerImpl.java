@@ -162,4 +162,28 @@ public class ArticleManagerImpl implements ArticleManger {
                 .getName());
         return detailVO;
     }
+
+    /**
+     * Like.
+     *
+     * @param name the name
+     */
+    @Override
+    public void like(String name) {
+        Article article = articleService.getByName(name);
+        article.setLikeNum(article.getLikeNum() + 1);
+        articleService.save(article);
+    }
+
+    /**
+     * Visit.
+     *
+     * @param name the name
+     */
+    @Override
+    public void visit(String name) {
+        Article article = articleService.getByName(name);
+        article.setLikeNum(article.getVisitNum() + 1);
+        articleService.save(article);
+    }
 }

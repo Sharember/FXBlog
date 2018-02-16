@@ -115,4 +115,16 @@ public class ArticleController {
     public Result<Article> add(@RequestBody Article article){
         return Result.of(articleManger.saveArticle(article));
     }
+
+    @PostMapping("/name/{name}/like")
+    public Result like(@PathVariable String name){
+        articleManger.like(name);
+        return Result.success();
+    }
+
+    @PostMapping("/name/{name}/visit")
+    public Result visit(@PathVariable String name){
+        articleManger.visit(name);
+        return Result.success();
+    }
 }

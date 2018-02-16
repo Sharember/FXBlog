@@ -33,7 +33,6 @@ export default class ArticleDigest extends PureComponent {
         // todo get net page
       }),
     };
-    console.log(dataSource);
 
     return (
       <List

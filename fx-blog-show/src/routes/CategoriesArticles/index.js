@@ -19,7 +19,6 @@ export default class CategoriesArticles extends Component {
   render() {
     const { article, loading } = this.props;
     const { articleDigists } = article;
-    //console.log(categoriesInfo)
     return (
       <ArticleDigest
         loading={loading}

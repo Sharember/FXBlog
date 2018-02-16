@@ -7,7 +7,7 @@ import styles from './index.less'
 
 export default class ArticleDetail extends PureComponent {
   render() {
-    const { data, loading } = this.props;
+    const { data, loading, onLike } = this.props;
     return (
       <div style={{ width: "100%" }}>
         <div style={{ width: "100%" }} className={styles.center} >
@@ -30,7 +30,10 @@ export default class ArticleDetail extends PureComponent {
           content={data.content}
         />
         <hr />
-        <ArticleFooter 
+        <ArticleFooter
+          onLike={onLike}
+          className={styles.center} 
+          likeNum={data.likeNum}
           lastArticle={data.lastArticle}
           nextArticle={data.nextArticle}
         /> 

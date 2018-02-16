@@ -33,8 +33,6 @@ export default class HeaderMenu extends PureComponent {
    */
   getDefaultCollapsedSubMenus(props) {
 
-    console.log(props.location)
-    console.log("hhh")
     const { location: { pathname } } = props || this.props;
     // eg. /list/search/articles = > ['','list','search','articles']
     let snippets = pathname.split('/');

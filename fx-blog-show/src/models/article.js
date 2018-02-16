@@ -1,8 +1,11 @@
+import _ from 'lodash';
+
 import { 
   getArticleDigests,
   getArticleByName,
   getArticleByCategories,
-  getArticleByTag
+  getArticleByTag,
+  visit
 } from '../services/articles';
 
 export default {
@@ -67,5 +70,15 @@ export default {
         currentArticle: payload,
       };
     }
-  }
+  },
+  subscriptions: {
+    setup({ history }) {
+      return history.listen(({ pathname }) => {
+         if(_.startsWith(pathname, '/article/name/')) {
+           // 访问量 + 1
+          visit(pathname.split('/')[3]);
+         }
+      });
+    },
+  },
 }

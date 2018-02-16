@@ -15,3 +15,15 @@ export function getArticleByCategories(name) {
 export function getArticleByTag(name) {
   return request('/article/tag/' + name);
 }
+
+export async function like(name) {
+  return request(`/article/name/${name}/like`, {
+    method: 'POST',
+  });
+}
+
+export async function visit(name) {
+  return request(`/article/name/${name}/visit`, {
+    method: 'POST',
+  });
+}
