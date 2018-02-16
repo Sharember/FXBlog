@@ -54,6 +54,18 @@ export default class ArticleFooter extends PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.likeNum !== nextProps.likeNum) {
+      let { likeNum } = nextProps;
+      if(!likeNum) {
+        likeNum = 0;
+      }
+      this.setState({
+        likeNum,
+      })
+    }
+  }
+
   likeClick = () => {
     const { onLike } = this.props;
     const likeNum = this.state.likeNum + 1;

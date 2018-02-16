@@ -15,7 +15,6 @@ import { getRoutes } from '../utils/utils';
 import { getMenuData } from '../common/menu';
 
 import logo from '../assets/logo.jpg';
-import Card from '_antd@3.2.0@antd/lib/card';
 
 
 const { Content } = Layout;

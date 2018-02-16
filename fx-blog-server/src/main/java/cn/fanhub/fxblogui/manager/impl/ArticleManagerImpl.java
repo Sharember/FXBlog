@@ -183,7 +183,7 @@ public class ArticleManagerImpl implements ArticleManger {
     @Override
     public void visit(String name) {
         Article article = articleService.getByName(name);
-        article.setLikeNum(article.getVisitNum() + 1);
+        article.setVisitNum(article.getVisitNum() + 1);
         articleService.save(article);
     }
 }
