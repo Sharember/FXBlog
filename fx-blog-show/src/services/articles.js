@@ -27,3 +27,7 @@ export async function like(name) {
 //     method: 'POST',
 //   });
 // }
+
+export async function getTotalArticle() {
+  return request(`/article/total/num`);
+}

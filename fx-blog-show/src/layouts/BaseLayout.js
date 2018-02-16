@@ -105,9 +105,9 @@ class BaseLayout extends React.PureComponent {
         isMobile: mobile,
       });
     });
-    // this.props.dispatch({
-    //   type: 'user/fetchCurrent',
-    // });
+    this.props.dispatch({
+      type: 'global/fetchTotalArticle',
+    });
   }
   getPageTitle() {
     const { routerData, location } = this.props;

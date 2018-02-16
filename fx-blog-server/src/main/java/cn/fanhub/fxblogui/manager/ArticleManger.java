@@ -90,4 +90,11 @@ public interface ArticleManger {
      */
     @Deprecated
     void visit(String name);
+
+    /**
+     * Gets article count.
+     *
+     * @return the article count
+     */
+    long getArticleCount();
 }

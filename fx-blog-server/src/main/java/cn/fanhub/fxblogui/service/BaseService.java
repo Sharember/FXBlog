@@ -57,6 +57,13 @@ public interface BaseService<T, ID extends Serializable>{
     T getOne(ID id);
 
     /**
+     * Gets count.
+     *
+     * @return the count
+     */
+    long getCount();
+
+    /**
      * Gets all.
      *
      * @return the all

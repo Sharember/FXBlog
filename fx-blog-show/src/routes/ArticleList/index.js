@@ -3,11 +3,16 @@ import { connect } from 'dva';
 
 import ArticleDigest from '../../components/ArticleDigest'
 
-@connect(({ article, loading }) => ({
+@connect(({ article, global, loading }) => ({
   article,
+  global,
   loading: loading.effects['article/fetch'],
 }))
 export default class ArticleList extends Component {
+
+  state = {
+    current: 1,
+  }
 
   componentDidMount() {
     this.props.dispatch({
@@ -16,12 +21,26 @@ export default class ArticleList extends Component {
     });
   }
 
+  getNextPage = (page) => {
+    this.props.dispatch({
+      type: 'article/fetch',
+      payload: page - 1,
+    });
+    this.setState({
+      current: page,
+    })
+  }
+
   render() {
-    const { article, loading } = this.props;
+    const { article, global, loading } = this.props;
     const { articleDigists } = article;
+    const { total } = global;
     return (
       <ArticleDigest
         loading={loading}
+        current={this.state.current}
+        total={total}
+        getNextPageInfo={this.getNextPage}
         dataSource={articleDigists}
       >
 

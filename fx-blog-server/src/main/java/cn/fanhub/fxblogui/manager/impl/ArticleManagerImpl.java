@@ -191,4 +191,14 @@ public class ArticleManagerImpl implements ArticleManger {
         article.setVisitNum(article.getVisitNum() + 1);
         articleService.save(article);
     }
+
+    /**
+     * Gets article count.
+     *
+     * @return the article count
+     */
+    @Override
+    public long getArticleCount() {
+        return articleService.getCount();
+    }
 }

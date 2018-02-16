@@ -23,14 +23,15 @@ const Digest = ({ digest }) => (
 export default class ArticleDigest extends PureComponent {
   
   render() {
-    const { dataSource, loading } = this.props;
+    const { dataSource, loading, getNextPageInfo, total, current } = this.props;
     const pagination = {
       pageSize: 10,
-      current: 1,
+      current,
       // todo get article num
-      total: 20,
-      onChange: (() => {
-        // todo get net page
+      total,
+      onChange: ((value) => {
+        console.log(value)
+        getNextPageInfo(value);
       }),
     };
 

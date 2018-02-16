@@ -94,6 +94,11 @@ public class ArticleController {
         return Result.of(articleManger.getByName(articleName));
     }
 
+    @GetMapping("/total/num")
+    public Result<Long> getTotalArticle() {
+        return Result.of(articleManger.getArticleCount());
+    }
+
     /**
      * Update article result.
      *

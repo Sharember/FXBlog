@@ -83,11 +83,32 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
         return baseRepository.findOne(id);
     }
 
+    /**
+     * Gets count.
+     *
+     * @return the count
+     */
+    @Override
+    public long getCount() {
+        return baseRepository.count();
+    }
+
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @Override
     public List<T> getAll() {
         return baseRepository.findAll();
     }
 
+    /**
+     * Gets all.
+     *
+     * @param ids the ids
+     * @return the all
+     */
     @Override
     public List<T> getAll(List<ID> ids) {
         List<T> list = Lists.newArrayList();
