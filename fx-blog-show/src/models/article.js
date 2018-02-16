@@ -5,7 +5,7 @@ import {
   getArticleByName,
   getArticleByCategories,
   getArticleByTag,
-  visit
+  // visit
 } from '../services/articles';
 
 export default {
@@ -71,14 +71,14 @@ export default {
       };
     }
   },
-  subscriptions: {
-    setup({ history }) {
-      return history.listen(({ pathname }) => {
-         if(_.startsWith(pathname, '/article/name/')) {
-           // 访问量 + 1
-          visit(pathname.split('/')[3]);
-         }
-      });
-    },
-  },
+  // subscriptions: {
+  //   setup({ history }) {
+  //     return history.listen(({ pathname }) => {
+  //        if(_.startsWith(pathname, '/article/name/')) {
+  //          // 访问量 + 1
+  //         visit(pathname.split('/')[3]);
+  //        }
+  //     });
+  //   },
+  // },
 }

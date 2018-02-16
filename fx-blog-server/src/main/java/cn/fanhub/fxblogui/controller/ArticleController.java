@@ -123,6 +123,7 @@ public class ArticleController {
     }
 
     @PostMapping("/name/{name}/visit")
+    @Deprecated
     public Result visit(@PathVariable String name){
         articleManger.visit(name);
         return Result.success();

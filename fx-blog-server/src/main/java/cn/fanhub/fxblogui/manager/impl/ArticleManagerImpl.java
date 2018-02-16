@@ -150,8 +150,12 @@ public class ArticleManagerImpl implements ArticleManger {
     @Override
     public ArticleDetailVO getByName(String articleName) {
         Article article = articleService.getByName(articleName);
+        // 访问量 + 1
+        article.setVisitNum(article.getVisitNum() + 1);
+
+        articleService.save(article);
         ArticleDetailVO detailVO = ArticleDetailVO.convertToArticleDigestVO(article);
-        //todo 这里有性能问题，应该只查出 name 就行，但是 getNameById 方法报错，后面再研究
+        //todo 这里有性能问题，应该只查出 name 就行，但是 getNameById 方法报错，后面再研究(两篇应该一起查)
         detailVO.setLastArticle(Optional
                 .ofNullable(articleService.getOne(article.getId() - 1))
                 .orElse(new Article("无"))
@@ -181,6 +185,7 @@ public class ArticleManagerImpl implements ArticleManger {
      * @param name the name
      */
     @Override
+    @Deprecated
     public void visit(String name) {
         Article article = articleService.getByName(name);
         article.setVisitNum(article.getVisitNum() + 1);

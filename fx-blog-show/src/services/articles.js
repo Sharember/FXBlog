@@ -22,8 +22,8 @@ export async function like(name) {
   });
 }
 
-export async function visit(name) {
-  return request(`/article/name/${name}/visit`, {
-    method: 'POST',
-  });
-}
+// export async function visit(name) {
+//   return request(`/article/name/${name}/visit`, {
+//     method: 'POST',
+//   });
+// }

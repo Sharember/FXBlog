@@ -88,5 +88,6 @@ public interface ArticleManger {
      *
      * @param name the name
      */
+    @Deprecated
     void visit(String name);
 }
