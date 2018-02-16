@@ -26,7 +26,7 @@ public interface ArticleManger {
      * @param tagName the tag name
      * @return the by tag name
      */
-    List<Article> getByTagName(String tagName);
+    List<ArticleDigestVO> getByTagName(String tagName);
 
     /**
      * Gets by categories name.

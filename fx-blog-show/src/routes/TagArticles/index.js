@@ -2,28 +2,28 @@ import React, { Component }  from 'react';
 import { connect } from 'dva';
 import ArticleDigest from '../../components/ArticleDigest'
 
-@connect(({ categories, loading }) => ({
-  categories,
-  loading: loading.effects['categories/fetch'],
+@connect(({ article, loading }) => ({
+  article,
+  loading: loading.effects['article/fechArticleByTag'],
 }))
-export default class CategoriesInfo extends Component {
+export default class TagArticles extends Component {
   
   componentDidMount() {
     const { location } = this.props;
     this.props.dispatch({
-      type: 'categories/fetch',
+      type: 'article/fechArticleByTag',
       payload: location.pathname.split('/')[3],
     });
   }
 
   render() {
-    const { categories, loading } = this.props;
-    const { categoriesInfo } = categories;
+    const { article, loading } = this.props;
+    const { articleDigists } = article;
     //console.log(categoriesInfo)
     return (
       <ArticleDigest
         loading={loading}
-        dataSource={categoriesInfo}
+        dataSource={articleDigists}
       >
 
       </ArticleDigest>

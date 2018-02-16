@@ -50,10 +50,16 @@ public class ArticleManagerImpl implements ArticleManger {
         // 新增 article
         final long articleId = IdUtil.getNextId(Article.class.getSimpleName(), mongo);
         tagService.save(
-                article.getTags().stream().peek(tag -> tag.getArticles().add(articleId)).collect(Collectors.toList())
+                article.getTags()
+                        .stream()
+                        .peek(tag -> tag.getArticles().add(articleId))
+                        .collect(Collectors.toList())
         );
         categoriesService.save(
-                article.getCategories().stream().peek(categories -> categories.getArticles().add(articleId)).collect(Collectors.toList())
+                article.getCategories()
+                        .stream()
+                        .peek(categories -> categories.getArticles().add(articleId))
+                        .collect(Collectors.toList())
         );
         return articleService.save(article);
     }
@@ -65,9 +71,12 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by tag name
      */
     @Override
-    public List<Article> getByTagName(String tagName) {
+    public List<ArticleDigestVO> getByTagName(String tagName) {
         Tag tag = tagService.getByName(tagName);
-        return articleService.getAll(tag.getArticles());
+        return articleService.getAll(tag.getArticles())
+                .stream()
+                .map(ArticleDigestVO::convertToArticleDigestVO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -126,7 +135,10 @@ public class ArticleManagerImpl implements ArticleManger {
     @Override
     public List<ArticleDigestVO> getArticleDigests(Pageable pageable) {
         Page<Article> page = articleService.getPage(pageable);
-        return page.getContent().stream().map(ArticleDigestVO::convertToArticleDigestVO).collect(Collectors.toList());
+        return page.getContent()
+                .stream()
+                .map(ArticleDigestVO::convertToArticleDigestVO)
+                .collect(Collectors.toList());
     }
 
     /**

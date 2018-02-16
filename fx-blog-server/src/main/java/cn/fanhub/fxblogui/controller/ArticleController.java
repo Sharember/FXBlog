@@ -55,7 +55,7 @@ public class ArticleController {
      * @return the articles by tag
      */
     @GetMapping("/tag/{tagName}")
-    public Result<List<Article>> getArticlesByTag(@PathVariable String tagName) {
+    public Result<List<ArticleDigestVO>> getArticlesByTag(@PathVariable String tagName) {
         return Result.of(articleManger.getByTagName(tagName));
     }
 

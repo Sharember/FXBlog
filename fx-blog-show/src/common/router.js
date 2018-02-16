@@ -80,7 +80,10 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['article'], () => import('../routes/Article')),
     },
     '/categories/name/:categoriesName': {
-      component: dynamicWrapper(app, ['categories'], () => import('../routes/Categories')),
+      component: dynamicWrapper(app, ['article'], () => import('../routes/CategoriesArticles')),
+    },
+    '/tag/name/:tagName': {
+      component: dynamicWrapper(app, ['article'], () => import('../routes/TagArticles')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.
