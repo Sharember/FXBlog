@@ -27,10 +27,8 @@ export default class ArticleDigest extends PureComponent {
     const pagination = {
       pageSize: 10,
       current,
-      // todo get article num
       total,
       onChange: ((value) => {
-        console.log(value)
         getNextPageInfo(value);
       }),
     };

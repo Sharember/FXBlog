@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Component
 public class SaveEventListener extends AbstractMongoEventListener<Object> {
@@ -44,10 +44,10 @@ public class SaveEventListener extends AbstractMongoEventListener<Object> {
                         logger.debug("集合的ID为=======================" + source);
                     }
                     if (field.isAnnotationPresent(CreateTime.class) && field.get(source) == null) {
-                        field.set(source, new Date());
+                        field.set(source, LocalDateTime.now());
                     }
                     if (field.isAnnotationPresent(UpdateTime.class)) {
-                        field.set(source, new Date());
+                        field.set(source, LocalDateTime.now());
 
                     }
                 }

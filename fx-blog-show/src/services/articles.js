@@ -31,3 +31,7 @@ export async function like(name) {
 export async function getTotalArticle() {
   return request(`/article/total/num`);
 }
+
+export async function getCardInfo() {
+  return request(`/article/card`);
+}

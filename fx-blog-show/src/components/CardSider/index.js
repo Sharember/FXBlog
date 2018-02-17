@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Layout, Card, List } from 'antd';
+import { Link } from 'dva/router';
 import styles from './index.less';
 
 const { Sider } = Layout;
@@ -20,7 +21,15 @@ export default class SiderMenu extends PureComponent {
             dataSource={dataSource}
             renderItem={item => (
               <List.Item>
-                <Card title={item.title} className={styles.card} >Card content</Card>
+                <Card title={item.title} className={styles.card} >
+                {
+                  item.content.map(name => (
+                    <div key={name}>
+                      <Link to={`/article/name/${name.split('(')[0]}`}>{name}</Link>
+                    </div>
+                  ))
+                
+                }</Card>
               </List.Item>
             )}
           />

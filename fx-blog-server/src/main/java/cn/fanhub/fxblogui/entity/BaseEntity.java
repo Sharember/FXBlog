@@ -7,7 +7,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public abstract class BaseEntity {
@@ -17,9 +17,9 @@ public abstract class BaseEntity {
     private long id;
 
     @CreateTime
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @UpdateTime
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 }

@@ -106,7 +106,7 @@ class BaseLayout extends React.PureComponent {
       });
     });
     this.props.dispatch({
-      type: 'global/fetchTotalArticle',
+      type: 'global/fetchCardInfo',
     });
   }
   getPageTitle() {
@@ -135,9 +135,10 @@ class BaseLayout extends React.PureComponent {
   }
   render() {
     const {
-      routerData, match, location,
+      routerData, match, location, global
     } = this.props;
     const bashRedirect = this.getBashRedirect();
+    const { cardInfo } = global;
     const layout = (
         <Layout>
           <GlobalHeader
@@ -169,7 +170,7 @@ class BaseLayout extends React.PureComponent {
               </Switch>
             </Content>
             <CardSider
-              dataSource={data}
+              dataSource={cardInfo}
             ></CardSider>
           </Layout>
           <GlobalFooter
@@ -210,5 +211,5 @@ class BaseLayout extends React.PureComponent {
 
 export default connect(({ global, loading }) => ({
   //fetchingNotices: loading.effects['global/fetchNotices'],
-  notices: global.notices,
+  global,
 }))(BaseLayout);

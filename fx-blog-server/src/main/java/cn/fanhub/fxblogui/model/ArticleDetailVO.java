@@ -6,8 +6,8 @@ import cn.fanhub.fxblogui.entity.Tag;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -28,7 +28,7 @@ public class ArticleDetailVO {
 
     private String nextArticle;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private List<Categories> categories = new ArrayList<>();
 

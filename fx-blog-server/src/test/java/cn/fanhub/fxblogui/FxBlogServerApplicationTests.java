@@ -6,6 +6,8 @@ import cn.fanhub.fxblogui.entity.Discuss;
 import cn.fanhub.fxblogui.entity.Menu;
 import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.repository.ArticleRepository;
+import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.MenuService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,12 @@ public class FxBlogServerApplicationTests {
 
 	@Autowired
 	private ArticleManger articleManger;
+
+	@Autowired
+	private ArticleService articleService;
+
+	@Autowired
+	private ArticleRepository articleRepository;
 
 	@Test
 	public void testMenu() {
@@ -354,6 +362,15 @@ public class FxBlogServerApplicationTests {
 					+ "\n");
 
 			articleManger.saveArticle(article);
+		}
+	}
+
+	@Test
+	public void testMongo () {
+		//System.out.println(articleRepository.getArticlesById(Arrays.asList(1L,2L)));
+
+		for (Article article : articleService.getVisitNumTop(5)) {
+			System.out.println(article.getName());
 		}
 	}
 

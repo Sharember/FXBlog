@@ -29,4 +29,6 @@ public interface ArticleRepository extends BaseRepository<Article, Long>{
      */
     Page<Article> findById(long id, Pageable pageable);
 
+
+
 }

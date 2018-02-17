@@ -2,6 +2,7 @@ package cn.fanhub.fxblogui.controller;
 
 import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.model.Result;
@@ -46,6 +47,16 @@ public class ArticleController {
     @GetMapping("/all")
     public Result<List<Article>> getArticles() {
         return Result.of(articleManger.getAll());
+    }
+
+    /**
+     * Gets card info.
+     *
+     * @return the card info
+     */
+    @GetMapping("/card")
+    public Result<AllCardInfoVO> getCardInfo() {
+        return Result.of(articleManger.getAllCardInfo());
     }
 
     /**
@@ -94,6 +105,11 @@ public class ArticleController {
         return Result.of(articleManger.getByName(articleName));
     }
 
+    /**
+     * Gets total article.
+     *
+     * @return the total article
+     */
     @GetMapping("/total/num")
     public Result<Long> getTotalArticle() {
         return Result.of(articleManger.getArticleCount());
@@ -121,12 +137,24 @@ public class ArticleController {
         return Result.of(articleManger.saveArticle(article));
     }
 
+    /**
+     * Like result.
+     *
+     * @param name the name
+     * @return the result
+     */
     @PostMapping("/name/{name}/like")
     public Result like(@PathVariable String name){
         articleManger.like(name);
         return Result.success();
     }
 
+    /**
+     * Visit result.
+     *
+     * @param name the name
+     * @return the result
+     */
     @PostMapping("/name/{name}/visit")
     @Deprecated
     public Result visit(@PathVariable String name){

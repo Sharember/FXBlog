@@ -4,6 +4,7 @@ import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.manager.ArticleManger;
+import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.service.ArticleService;
@@ -200,5 +201,17 @@ public class ArticleManagerImpl implements ArticleManger {
     @Override
     public long getArticleCount() {
         return articleService.getCount();
+    }
+
+    /**
+     * Gets all card info.
+     *
+     * @return the all card info
+     */
+    @Override
+    public AllCardInfoVO getAllCardInfo() {
+        return new AllCardInfoVO()
+                .convertCreateTop(articleService.getCreateTimeTop(5))
+                .convertVisitTop(articleService.getVisitNumTop(5));
     }
 }

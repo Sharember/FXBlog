@@ -1,6 +1,7 @@
 package cn.fanhub.fxblogui.manager;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import org.springframework.data.domain.Pageable;
@@ -97,4 +98,11 @@ public interface ArticleManger {
      * @return the article count
      */
     long getArticleCount();
+
+    /**
+     * Gets all card info.
+     *
+     * @return the all card info
+     */
+    AllCardInfoVO getAllCardInfo();
 }
