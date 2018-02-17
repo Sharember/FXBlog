@@ -18,7 +18,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -165,12 +164,8 @@ public class ArticleManagerImpl implements ArticleManger {
 
         articleService.save(article);
         ArticleDetailVO detailVO = ArticleDetailVO.convertToArticleDigestVO(article);
-        detailVO.setLastArticle(Optional
-                .ofNullable(articleService.getNameById(article.getId() - 1))
-                .orElse("无"));
-        detailVO.setNextArticle(Optional
-                .ofNullable(articleService.getNameById(article.getId() + 1))
-                .orElse("无"));
+        detailVO.setLastArticle(articleService.getNameById(article.getId() - 1));
+        detailVO.setNextArticle(articleService.getNameById(article.getId() + 1));
         return detailVO;
     }
 

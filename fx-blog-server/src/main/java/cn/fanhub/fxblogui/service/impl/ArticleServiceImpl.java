@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author chengfan
@@ -47,7 +48,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implement
      */
     @Override
     public String getNameById(long id) {
-        return super.baseRepository.getNameById(id).getName();
+        return Optional
+                .ofNullable(super.baseRepository.getNameById(id))
+                .orElse(new Article("无"))
+                .getName();
     }
 
     /**

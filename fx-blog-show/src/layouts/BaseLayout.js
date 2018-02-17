@@ -85,6 +85,9 @@ class BaseLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'global/fetchCardInfo',
     });
+    this.props.dispatch({
+      type: 'global/fetchTotalArticle',
+    });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
