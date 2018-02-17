@@ -6,7 +6,7 @@ import cn.fanhub.fxblogui.entity.Tag;
 import lombok.Data;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class ArticleDetailVO {
 
     private String nextArticle;
 
-    private LocalDateTime createTime;
+    private String createTime;
 
     private List<Categories> categories = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class ArticleDetailVO {
         articleDetailVO.setContent(article.getContent());
         articleDetailVO.setLikeNum(article.getLikeNum());
         articleDetailVO.setVisitNum(article.getVisitNum());
-        articleDetailVO.setCreateTime(article.getCreateTime());
+        articleDetailVO.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(article.getCreateTime()));
         articleDetailVO.setCategories(article.getCategories());
         articleDetailVO.setTags(article.getTags());
 
