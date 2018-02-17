@@ -21,15 +21,16 @@ export default class SiderMenu extends PureComponent {
             dataSource={dataSource}
             renderItem={item => (
               <List.Item>
-                <Card title={item.title} className={styles.card} >
-                {
-                  item.content.map(name => (
-                    <div key={name}>
-                      <Link to={`/article/name/${name.split('(')[0]}`}>{name}</Link>
-                    </div>
-                  ))
-                
-                }</Card>
+                <Card title={item.title} className={styles.card}>
+                  {
+                    item.content.map(name => (
+                      <div key={name}>
+                        <Link to={`/article/name/${name.split('(')[0]}`}>{name}</Link>
+                      </div>
+                    ))
+                  
+                  }
+                </Card>
               </List.Item>
             )}
           />

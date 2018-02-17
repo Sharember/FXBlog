@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, Icon } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
+import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
@@ -16,30 +16,7 @@ import { getMenuData } from '../common/menu';
 
 import logo from '../assets/logo.jpg';
 
-
 const { Content } = Layout;
-
-const data = [
-  {
-    title: '热门文章',
-  },
-  {
-    title: '最新文章',
-  },
-  {
-    title: 'Title 3',
-  },
-  {
-    title: 'Title 4',
-  },
-  {
-    title: 'Title 5',
-  },
-  {
-    title: 'Title 6',
-  },
-];
-
 
 /**
  * 根据菜单取得重定向地址.
@@ -210,6 +187,5 @@ class BaseLayout extends React.PureComponent {
 }
 
 export default connect(({ global, loading }) => ({
-  //fetchingNotices: loading.effects['global/fetchNotices'],
   global,
 }))(BaseLayout);
