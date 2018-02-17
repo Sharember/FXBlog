@@ -33,6 +33,6 @@ public class IdUtil {
     public static Long getNextId(String collName, MongoTemplate mongo) {
         Query query = new Query(Criteria.where("collName").is(collName));
         SequenceInfo seq = mongo.findOne(query, SequenceInfo.class);
-        return seq == null ? 1 : seq.getSeqId();
+        return seq == null ? 0 : seq.getSeqId();
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
@@ -53,8 +54,12 @@ public class FxBlogServerApplicationTests {
 	public void testArticle() {
 		Tag tag = new Tag();
 		tag.setName("study");
+		Tag tag2 = new Tag();
+		tag2.setName("java");
 		Categories categories = new Categories();
 		categories.setName("java");
+		Categories categories2 = new Categories();
+		categories2.setName("spring");
 		Discuss discuss = new Discuss();
 		discuss.setContent("hhh");
 		discuss.setIp("localhost");
@@ -62,8 +67,8 @@ public class FxBlogServerApplicationTests {
 			Article article = new Article();
 
 			article.setName("test" + i);
-			article.setTags(Collections.singletonList(tag));
-			article.setCategories(Collections.singletonList(categories));
+			article.setTags(Arrays.asList(tag, tag2));
+			article.setCategories(Arrays.asList(categories, categories2));
 			article.setDiscusses(Collections.singletonList(discuss));
 			article.setUrl("/test" + i);
 			article.setVisitNum(10);
@@ -367,9 +372,9 @@ public class FxBlogServerApplicationTests {
 
 	@Test
 	public void testMongo () {
-		//System.out.println(articleRepository.getArticlesById(Arrays.asList(1L,2L)));
+		//System.out.println(articleRepository.getNameById(1L).getName());
 
-		for (Article article : articleService.getVisitNumTop(5)) {
+		for (Article article : articleService.getCreateTimeTop(5)) {
 			System.out.println(article.getName());
 		}
 	}

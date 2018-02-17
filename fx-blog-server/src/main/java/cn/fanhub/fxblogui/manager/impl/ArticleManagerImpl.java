@@ -53,13 +53,21 @@ public class ArticleManagerImpl implements ArticleManger {
         tagService.save(
                 article.getTags()
                         .stream()
-                        .peek(tag -> tag.getArticles().add(articleId))
+                        .peek(tag -> {
+                            List<Long> list = tag.getArticles();
+                            list.add(articleId);
+                            tag.setArticleNum(list.size());
+                        })
                         .collect(Collectors.toList())
         );
         categoriesService.save(
                 article.getCategories()
                         .stream()
-                        .peek(categories -> categories.getArticles().add(articleId))
+                        .peek(categories -> {
+                            List<Long> list = categories.getArticles();
+                            list.add(articleId);
+                            categories.setArticleNum(list.size());
+                        })
                         .collect(Collectors.toList())
         );
         return articleService.save(article);
@@ -124,6 +132,7 @@ public class ArticleManagerImpl implements ArticleManger {
      */
     @Override
     public Article update(Article article) {
+        // todo tag 修改等
         return articleService.update(article);
     }
 
@@ -156,15 +165,12 @@ public class ArticleManagerImpl implements ArticleManger {
 
         articleService.save(article);
         ArticleDetailVO detailVO = ArticleDetailVO.convertToArticleDigestVO(article);
-        //todo 这里有性能问题，应该只查出 name 就行，但是 getNameById 方法报错，后面再研究(两篇应该一起查)
         detailVO.setLastArticle(Optional
-                .ofNullable(articleService.getOne(article.getId() - 1))
-                .orElse(new Article("无"))
-                .getName());
+                .ofNullable(articleService.getNameById(article.getId() - 1))
+                .orElse("无"));
         detailVO.setNextArticle(Optional
-                .ofNullable(articleService.getOne(article.getId() + 1))
-                .orElse(new Article("无"))
-                .getName());
+                .ofNullable(articleService.getNameById(article.getId() + 1))
+                .orElse("无"));
         return detailVO;
     }
 
@@ -212,6 +218,8 @@ public class ArticleManagerImpl implements ArticleManger {
     public AllCardInfoVO getAllCardInfo() {
         return new AllCardInfoVO()
                 .convertCreateTop(articleService.getCreateTimeTop(5))
-                .convertVisitTop(articleService.getVisitNumTop(5));
+                .convertVisitTop(articleService.getVisitNumTop(5))
+                .convertTags(tagService.getAllTagName());
+
     }
 }

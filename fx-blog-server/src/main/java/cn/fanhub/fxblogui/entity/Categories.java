@@ -18,5 +18,7 @@ public class Categories extends BaseEntity{
 
     private String name;
 
+    private int articleNum;
+
     private List<Long> articles = new ArrayList<>();
 }

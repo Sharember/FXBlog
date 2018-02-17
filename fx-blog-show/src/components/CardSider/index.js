@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Layout, Card, List } from 'antd';
+import { Layout, Card, List, Tag } from 'antd';
 import { Link } from 'dva/router';
 import styles from './index.less';
 
 const { Sider } = Layout;
+
+const getRandomColor = () => {
+  return '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6); 
+}
 
 export default class SiderMenu extends PureComponent {
   render() {
@@ -23,13 +27,20 @@ export default class SiderMenu extends PureComponent {
               <List.Item>
                 <Card title={item.title} className={styles.card}>
                   {
-                    item.content.map(name => (
-                      <div key={name}>
-                        <Link to={`/article/name/${name.split('(')[0]}`}>{name}</Link>
-                      </div>
-                    ))
-                  
+                    item.type === 'tags' ?
+                      item.content.map(name => (
+                        <Tag key={name} color={getRandomColor()}>
+                          <Link to={`/tag/name/${name.split('-')[0]}`}>{name.split('-')[0]}</Link>
+                        </Tag>
+                      ))
+                    :
+                      item.content.map(name => (
+                        <div key={name}>
+                          <Link to={`/article/name/${name.split('(')[0]}`}>{name}</Link>
+                        </div>
+                      ))
                   }
+
                 </Card>
               </List.Item>
             )}

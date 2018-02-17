@@ -1,6 +1,7 @@
 package cn.fanhub.fxblogui.model;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.entity.Tag;
 import lombok.Data;
 import lombok.ToString;
 
@@ -36,8 +37,19 @@ public class AllCardInfoVO {
                  articles
                          .stream()
                          .map(article -> article.getName() + " (" + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(article.getCreateTime()) + ")")
-                         .collect(Collectors.toList())
-                , "article"));
+                         .collect(Collectors.toList()),
+                "article"));
+        return this;
+    }
+
+    public AllCardInfoVO convertTags(List<Tag> tags) {
+        cards.add(new Card(
+                "标签云",
+                 tags
+                    .stream()
+                    .map(tag -> tag.getName() + "-" + tag.getArticleNum())
+                    .collect(Collectors.toList()),
+                "tags"));
         return this;
     }
 
@@ -51,6 +63,7 @@ public class AllCardInfoVO {
             this.content = content;
             this.type = type;
         }
+
 
         public List<String> getContent() {
             return content;

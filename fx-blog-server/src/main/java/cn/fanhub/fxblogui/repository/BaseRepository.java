@@ -1,8 +1,10 @@
 package cn.fanhub.fxblogui.repository;
 
+import cn.fanhub.fxblogui.entity.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -69,5 +71,6 @@ public interface BaseRepository<M, ID extends Serializable> extends PagingAndSor
      * @param id the id
      * @return the name by id
      */
-    String getNameById(ID id);
+    @Query(value ="{ '_id' : ?0 }", fields = "{ 'name': 1 }")
+    Article getNameById(ID id);
 }
