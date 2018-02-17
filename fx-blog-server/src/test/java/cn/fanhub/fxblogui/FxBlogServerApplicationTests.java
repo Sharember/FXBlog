@@ -36,18 +36,29 @@ public class FxBlogServerApplicationTests {
 	@Test
 	public void testMenu() {
 		Menu menu = new Menu();
-		menu.setUrl("menu");
-		menu.setName("menu");
+		menu.setPath("/tag/name/study");
+		menu.setName("study");
 
 		Menu subMenu = new Menu();
-		subMenu.setUrl("menu2");
-		subMenu.setName("menu2");
+		subMenu.setPath("/tag/name/java");
+		subMenu.setName("java");
 
-		menu.setMenus(Collections.singletonList(subMenu));
+		menu.setChildren(Collections.singletonList(subMenu));
 
+		Menu menu1 = new Menu();
+		menu1.setPath("/categories/name/java");
+		menu1.setName("java");
 
-		menuService.save(subMenu);
+		Menu subMenu1 = new Menu();
+		subMenu1.setPath("/categories/name/spring");
+		subMenu1.setName("spring");
+		menu1.setChildren(Collections.singletonList(subMenu1));
+
+		//menuService.save(subMenu);
 		menuService.save(menu);
+		menuService.save(menu1);
+
+
 	}
 	
 	@Test

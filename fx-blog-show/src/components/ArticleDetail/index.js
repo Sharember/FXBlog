@@ -9,7 +9,7 @@ export default class ArticleDetail extends PureComponent {
   render() {
     const { data, loading, onLike } = this.props;
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", overflowY: "hidden" }}>
         <div style={{ width: "100%" }} className={styles.center} >
           <Spin 
             spinning={loading}

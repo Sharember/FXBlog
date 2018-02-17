@@ -12,30 +12,12 @@ import GlobalFooter from '../components/GlobalFooter';
 import CardSider from '../components/CardSider';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
-import { getMenuData } from '../common/menu';
+
 
 import logo from '../assets/logo.jpg';
 
 const { Content } = Layout;
 
-/**
- * 根据菜单取得重定向地址.
- */
-const redirectData = [];
-const getRedirect = (item) => {
-  if (item && item.children) {
-    if (item.children[0] && item.children[0].path) {
-      redirectData.push({
-        from: `/${item.path}`,
-        to: `/${item.children[0].path}`,
-      });
-      item.children.forEach((children) => {
-        getRedirect(children);
-      });
-    }
-  }
-};
-getMenuData().forEach(getRedirect);
 
 const query = {
   'screen-xs': {
@@ -88,6 +70,10 @@ class BaseLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'global/fetchTotalArticle',
     });
+
+    this.props.dispatch({
+      type: 'global/fetchMenuData',
+    });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -118,10 +104,11 @@ class BaseLayout extends React.PureComponent {
       routerData, match, location, global
     } = this.props;
     const bashRedirect = this.getBashRedirect();
-    const { cardInfo } = global;
+    const { cardInfo, menuData } = global;
     const layout = (
         <Layout>
           <GlobalHeader
+            menuData={menuData}
             logo={logo}
             location={location}
             isMobile={this.state.isMobile}
@@ -129,11 +116,6 @@ class BaseLayout extends React.PureComponent {
           <Layout>
             <Content style={{ margin: '4% 10% 0', height: '100%' }}>
               <Switch>
-                {
-                  redirectData.map(item =>
-                    <Redirect key={item.from} exact from={item.from} to={item.to} />
-                  )
-                }
                 {
                   getRoutes(match.path, routerData).map(item =>
                     (

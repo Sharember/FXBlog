@@ -2,7 +2,6 @@ package cn.fanhub.fxblogui.entity;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +10,11 @@ import java.util.List;
 @ToString
 public class Menu extends BaseEntity {
 
-    private String url;
+    private String path;
     private String name;
     private Categories categories;
     private Tag tag;
     private String icon;
 
-    @DBRef
-    private List<Menu> menus = new ArrayList<>();
+    private List<Menu> children = new ArrayList<>();
 }

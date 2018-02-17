@@ -7,7 +7,6 @@ import HeaderSearch from '../HeaderSearch';
 import HeaderMenu from '../HeaderMenu';
 import HeaderLogo from '../HeaderLogo';
 import styles from './index.less';
-import { getMenuData } from '../../common/menu';
 
 const { Header } = Layout;
 
@@ -19,7 +18,7 @@ export default class GlobalHeader extends PureComponent {
 
   render() {
     const {
-      isMobile, logo, location
+      isMobile, logo, location, menuData
     } = this.props;
 
     return (
@@ -40,7 +39,7 @@ export default class GlobalHeader extends PureComponent {
         />
         <HeaderMenu 
           className={styles.menu}
-          menuData={getMenuData()}
+          menuData={menuData}
           location={location}
           isMobile={isMobile}
         />

@@ -24,6 +24,13 @@ export default class HeaderMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.menus = props.menuData;
+  
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(this.props.menuData !== newProps.menuData) {
+      this.menus = newProps.menuData;
+    }
   }
 
   /**
