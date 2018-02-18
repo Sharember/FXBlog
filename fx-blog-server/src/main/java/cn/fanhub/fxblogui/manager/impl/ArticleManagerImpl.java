@@ -11,13 +11,17 @@ import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.CategoriesService;
 import cn.fanhub.fxblogui.service.TagService;
 import cn.fanhub.fxblogui.util.IdUtil;
+import cn.fanhub.fxblogui.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -79,12 +83,17 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by tag name
      */
     @Override
-    public List<ArticleDigestVO> getByTagName(String tagName) {
+    public Map<String, Object> getByTagName(String tagName, PageRequest pageRequest) {
+        Map<String, Object> map = new HashMap<>();
         Tag tag = tagService.getByName(tagName);
-        return articleService.getAll(tag.getArticles())
+        map.put("total", tag.getArticleNum());
+        map.put("articles",
+         articleService.getAll(PageUtil.getPageArticleList(tag.getArticles(), pageRequest, tag.getArticleNum()))
                 .stream()
                 .map(ArticleDigestVO::convertToArticleDigestVO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+
+        return map;
     }
 
     /**
@@ -94,12 +103,17 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by categories name
      */
     @Override
-    public List<ArticleDigestVO> getByCategoriesName(String categoriesName) {
+    public Map<String, Object> getByCategoriesName(String categoriesName, PageRequest pageRequest){
         Categories categories = categoriesService.getByName(categoriesName);
-        return articleService.getAll(categories.getArticles())
-                .stream()
-                .map(ArticleDigestVO::convertToArticleDigestVO)
-                .collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", categories.getArticleNum());
+        map.put("articles",
+                articleService.getAll(PageUtil.getPageArticleList(categories.getArticles(), pageRequest, categories.getArticleNum()))
+                        .stream()
+                        .map(ArticleDigestVO::convertToArticleDigestVO)
+                        .collect(Collectors.toList()));
+
+        return map;
     }
 
     /**

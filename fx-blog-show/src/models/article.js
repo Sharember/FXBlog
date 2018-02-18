@@ -14,6 +14,7 @@ export default {
   state: {
     articleDigists: [],
     currentArticle: {},
+    articleAndTotal: {},
   },
 
   effects: {
@@ -41,8 +42,8 @@ export default {
       const response = yield call(getArticleByCategories, payload);
       if (response.data.success) {
         yield put({
-          type: 'getArticleDigests',
-          payload: response.data.value,
+          type: 'updateState',
+          articleAndTotal: response.data.value,
         });
       }
     },
@@ -50,14 +51,20 @@ export default {
       const response = yield call(getArticleByTag, payload);
       if (response.data.success) {
         yield put({
-          type: 'getArticleDigests',
-          payload: response.data.value,
+          type: 'updateState',
+          articleAndTotal: response.data.value,
         });
       }
     }
   },
 
   reducers: {
+    updateState(state, payload) {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
     getArticleDigests(state, { payload }) {
       return {
         ...state,

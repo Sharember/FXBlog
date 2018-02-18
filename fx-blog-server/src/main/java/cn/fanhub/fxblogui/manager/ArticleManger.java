@@ -4,9 +4,11 @@ import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author chengfan
@@ -27,7 +29,7 @@ public interface ArticleManger {
      * @param tagName the tag name
      * @return the by tag name
      */
-    List<ArticleDigestVO> getByTagName(String tagName);
+    Map<String, Object> getByTagName(String tagName, PageRequest pageRequest);
 
     /**
      * Gets by categories name.
@@ -35,7 +37,7 @@ public interface ArticleManger {
      * @param categoriesName the categories name
      * @return the by categories name
      */
-    List<ArticleDigestVO> getByCategoriesName(String categoriesName);
+    Map<String, Object> getByCategoriesName(String categoriesName, PageRequest pageRequest);
 
     /**
      * Gets one.

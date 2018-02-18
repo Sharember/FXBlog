@@ -8,12 +8,12 @@ export function getArticleByName(name) {
   return request('/article/name/' + name);
 }
 
-export function getArticleByCategories(name) {
-  return request('/article/categories/' + name);
+export function getArticleByCategories(payload) {
+  return request(`/article/categories//${payload.categories}/page/${payload.page}`);
 }
 
-export function getArticleByTag(name) {
-  return request('/article/tag/' + name);
+export function getArticleByTag(payload) {
+  return request(`/article/tag/${payload.tag}/page/${payload.page}`);
 }
 
 export async function like(name) {

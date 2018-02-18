@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author chengfan
@@ -65,9 +66,10 @@ public class ArticleController {
      * @param tagName the tag name
      * @return the articles by tag
      */
-    @GetMapping("/tag/{tagName}")
-    public Result<List<ArticleDigestVO>> getArticlesByTag(@PathVariable String tagName) {
-        return Result.of(articleManger.getByTagName(tagName));
+    @GetMapping("/tag/{tagName}/page/{pageNum}")
+    public Result<Map<String, Object>> getArticlesByTag(@PathVariable String tagName, @PathVariable int pageNum) {
+        PageRequest pageRequest = new PageRequest(pageNum, 10);
+        return Result.of(articleManger.getByTagName(tagName, pageRequest));
     }
 
     /**
@@ -76,9 +78,10 @@ public class ArticleController {
      * @param categoriesName the categories name
      * @return the articles by categories
      */
-    @GetMapping("/categories/{categoriesName}")
-    public Result<List<ArticleDigestVO>> getArticlesByCategories(@PathVariable String categoriesName) {
-        return Result.of(articleManger.getByCategoriesName(categoriesName));
+    @GetMapping("/categories/{categoriesName}/page/{pageNum}")
+    public Result<Map<String, Object>> getArticlesByCategories(@PathVariable String categoriesName, @PathVariable int pageNum) {
+        PageRequest pageRequest = new PageRequest(pageNum, 10);
+        return Result.of(articleManger.getByCategoriesName(categoriesName, pageRequest));
     }
 
     /**
