@@ -114,7 +114,13 @@ class BaseLayout extends React.PureComponent {
             isMobile={this.state.isMobile}
           />
           <Layout>
-            <Content style={{ margin: '4% 10% 0', height: '100%' }}>
+            <Content style={{ 
+              margin: '6% 5% 0 15%', 
+              height: '100%', 
+              backgroundColor: '#fff',
+              padding: '2% 4% 2% 4%',
+              boxShadow: '1px 1px 2px #cccaca',
+            }}>
               <Switch>
                 {
                   getRoutes(match.path, routerData).map(item =>
@@ -132,6 +138,10 @@ class BaseLayout extends React.PureComponent {
               </Switch>
             </Content>
             <CardSider
+              style={{
+                backgroundColor: '#fff',
+                padding: '2% 4% 0 4%'
+              }}
               dataSource={cardInfo}
             ></CardSider>
           </Layout>

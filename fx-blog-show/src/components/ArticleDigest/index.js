@@ -49,8 +49,9 @@ export default class ArticleDigest extends PureComponent {
             <List.Item.Meta
               //avatar={<Avatar src={item.avatar} />}
               title={<Link to={`/article/name/${item.name}`}>{item.name}</Link>}
-              description={<Digest digest={item.digest} />}
+              // description={<Digest digest={item.digest} />}
             />
+              <Digest digest={item.digest} />
           </List.Item>
         )}
       />

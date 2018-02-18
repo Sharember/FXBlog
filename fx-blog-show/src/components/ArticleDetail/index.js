@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Spin } from 'antd';
+import { Spin, Divider } from 'antd';
 import ArticleHeader from './ArticleHeader';
 import ArticleContent from './ArticleContent';
 import ArticleFooter from './ArticleFooter';
@@ -25,11 +25,11 @@ export default class ArticleDetail extends PureComponent {
           />
         </div>
         
-        <hr />
+        <Divider />
         <ArticleContent 
           content={data.content}
         />
-        <hr />
+        <Divider> 看完了，记得点个赞哟 </Divider>
         <ArticleFooter
           onLike={onLike}
           className={styles.center} 
