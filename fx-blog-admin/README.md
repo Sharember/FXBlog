@@ -1,4 +1,4 @@
-## FXBlog ui
+## FXBlog uadmin
 
 base on react、dva、antd and so on。
 
@@ -8,7 +8,7 @@ The basic framework is modified according to [ant design pro](https://pro.ant.de
 
 ```shell
 
-$ cd fx-blog-show
+$ cd fx-blog-admin
 $ npm install & npm start
 
 ```

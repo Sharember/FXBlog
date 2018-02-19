@@ -88,10 +88,10 @@ public class ArticleManagerImpl implements ArticleManger {
         Tag tag = tagService.getByName(tagName);
         map.put("total", tag.getArticleNum());
         map.put("articles",
-         articleService.getAll(PageUtil.getPageArticleList(tag.getArticles(), pageRequest, tag.getArticleNum()))
-                .stream()
-                .map(ArticleDigestVO::convertToArticleDigestVO)
-                .collect(Collectors.toList()));
+                articleService.getAll(PageUtil.getPageArticleList(tag.getArticles(), pageRequest, tag.getArticleNum()))
+                        .stream()
+                        .map(ArticleDigestVO::convertToArticleDigestVO)
+                        .collect(Collectors.toList()));
 
         return map;
     }
@@ -103,7 +103,7 @@ public class ArticleManagerImpl implements ArticleManger {
      * @return the by categories name
      */
     @Override
-    public Map<String, Object> getByCategoriesName(String categoriesName, PageRequest pageRequest){
+    public Map<String, Object> getByCategoriesName(String categoriesName, PageRequest pageRequest) {
         Categories categories = categoriesService.getByName(categoriesName);
         Map<String, Object> map = new HashMap<>();
         map.put("total", categories.getArticleNum());

@@ -8,9 +8,12 @@ export default ({ className, links, copyright }) => {
     <div className={clsString}>
       {
         links && (
-          <div className={styles.links}>
+          <div
+            className={styles.links}
+          >
             {links.map(link => (
               <a
+                style={{ color: '#fff' }}
                 key={link.key}
                 target={link.blankTarget ? '_blank' : '_self'}
                 href={link.href}

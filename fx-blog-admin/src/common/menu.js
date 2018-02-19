@@ -1,6 +1,10 @@
 import { isUrl } from '../utils/utils';
 
 const menuData = [{
+  name: '写文章',
+  path: 'write',
+  icon: 'file-add',
+}, {
   name: '结果页',
   icon: 'check-circle-o',
   path: 'result',

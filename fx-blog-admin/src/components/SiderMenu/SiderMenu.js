@@ -3,6 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import styles from './index.less';
+import GlobalFooter from '../GlobalFooter';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -235,6 +236,38 @@ export default class SiderMenu extends PureComponent {
         >
           {this.getNavMenuItems(this.menus)}
         </Menu>
+        {
+          !collapsed ? (
+            <GlobalFooter
+              links={[{
+                  key: '简书 主页',
+                  title: '简书 主页',
+                  href: 'https://www.jianshu.com/u/8dc5811b228f',
+                  blankTarget: true,
+                }, {
+                  key: 'github',
+                  title: <Icon type="github" />,
+                  href: 'https://github.com/cfshuming',
+                  blankTarget: true,
+                }, {
+                  key: ' csdn 博客',
+                  title: 'csdn 博客',
+                  href: 'http://blog.csdn.net/qq_31655965',
+                  blankTarget: true,
+                }]}
+              copyright={
+                <div>
+                    Copyright <Icon type="copyright" /> 2018 create by shuming
+                </div>
+                }
+              style={{
+                paddingBottom: '5px',
+              }}
+            />
+          ) :
+           null
+        }
+
       </Sider>
     );
   }
