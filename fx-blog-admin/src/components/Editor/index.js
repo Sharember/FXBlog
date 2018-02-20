@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Input, Row, Icon } from 'antd';
+import { Input, Row } from 'antd';
 import { FaColumns, FaPencil, FaEye, FaArrowsAlt } from 'react-icons/lib/fa';
 // import { FaColumns } from 'react-icons/lib/fa';
 import marked from 'marked';

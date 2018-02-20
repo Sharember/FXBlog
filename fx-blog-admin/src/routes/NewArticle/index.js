@@ -6,6 +6,20 @@ import Editor from '../../components/Editor';
 import ArticleList from '../../components/ArticleList';
 import styles from './index.less';
 
+const data = [{
+  name: 'test',
+  tags: [
+    'tag1',
+    'tag2',
+  ],
+}, {
+  name: 'hhhhhh',
+  tags: [
+    'ha',
+    'he',
+  ],
+}];
+
 @connect(({ article, categories, loading }) => ({
   article,
   categories,
@@ -22,7 +36,9 @@ export default class TriggerException extends Component {
             />
           </Col>
           <Col span={4}>
-            <ArticleList />
+            <ArticleList
+              dataSource={data}
+            />
           </Col>
           <Col span={16}>
             <Editor />
