@@ -1,30 +1,87 @@
+@toolbarHeight: 4vh;
+@editorHeight: 88vh;
+@borderColor: #ccc;
+
+
 .editor {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 88vh;
-  min-height: 88vh;
+  height: @editorHeight;
   background: #fff;
 
-  .header{
-    min-height: 40px;
-    width: 100%;
-    padding: 3px;
+  &.fullscreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    z-index: 500;
+
   }
 
-  .view {
-    padding: 10px 5px 0 5px;;
-    min-height: 88vh;
-    height: 100%;
-    background: rgb(179, 128, 52);
+  .header{
+    min-height: @toolbarHeight;
+    width: 100%;
+    position:relative;
+  
+    nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      a {
+        margin: 0 5px 0 5px;
+      }
+    }
   }
   
-  .textarea {
-    min-height: 88vh;
-    height: 100%;
-    border-right: 1px solid #000000;
+  .mdEditor {
+    width: 50%;
+    height: @editorHeight - @toolbarHeight;
+    transition: width .3s;
+    background-color: #fff;
+  
+    &.expand { width: 100%; }
+  
+    textarea {
+      display: block;
+      border-style: none;
+      resize: none;
+      outline: 0;
+      height: 100%;
+      min-height: @editorHeight - @toolbarHeight;
+      width: 100%;
+      // margin-top: ;
+      padding: 10px 15px 0 15px;
+    }
   }
-
+  .mdPreview {
+    position: absolute;
+    width: 50%;
+    height: @editorHeight - @toolbarHeight;
+    left: 50%;
+    top: 0;
+    // background-color: #f6f6f6;
+    padding: 45px 20px 20px 20px;
+    border-left: 1px solid @borderColor;
+    overflow: auto;
+    transition: left .3s, width .3s;
+    padding: 10px 5px 0 5px;;
+    background: rgb(179, 128, 52);
+  
+    &.expand {
+      left: 0;
+      width: 100%;
+      border-left-style: none;
+    }
+    &.shrink {
+      left: 100%;
+      width: 0;
+    }
+  }
 }
+
 
 
 
