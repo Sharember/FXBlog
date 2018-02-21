@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Row, Col } from 'antd';
-import CategoriesTree from '../../components/CategoriesTree';
 import Editor from '../../components/Editor';
 import ArticleList from '../../components/ArticleList';
-import styles from './index.less';
+// import styles from './index.less';
 
 const data = [{
   name: 'test',
@@ -30,17 +29,12 @@ export default class TriggerException extends Component {
     return (
       <div>
         <Row>
-          <Col span={4}>
-            <CategoriesTree
-              className={styles.categories}
-            />
-          </Col>
-          <Col span={4}>
+          <Col span={6}>
             <ArticleList
               dataSource={data}
             />
           </Col>
-          <Col span={16}>
+          <Col span={18}>
             <Editor />
           </Col>
         </Row>

@@ -52,11 +52,11 @@ export default class EditableTagGroup extends PureComponent {
   render() {
     const { tags, inputVisible, inputValue } = this.state;
     return (
-      <div>
+      <div style={{ display: 'inline-block' }}>
         {tags.map((tag) => {
           const isLongTag = tag.length > 20;
           const tagElem = (
-            <Tag key={tag} closable afterClose={() => this.handleClose(tag)}>
+            <Tag key={tag} color="volcano" closable afterClose={() => this.handleClose(tag)}>
               {isLongTag ? `${tag.slice(0, 20)}...` : tag}
             </Tag>
           );
@@ -76,6 +76,7 @@ export default class EditableTagGroup extends PureComponent {
         )}
         {!inputVisible && (
           <Tag
+            color="volcano"
             onClick={this.showInput}
             style={{ background: '#fff', borderStyle: 'dashed' }}
           >
