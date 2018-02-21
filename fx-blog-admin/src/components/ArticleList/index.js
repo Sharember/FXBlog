@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Tag } from 'antd';
+import { Menu } from 'antd';
+
+import EditableTagGroup from '../EditableTagGroup';
 
 import styles from './index.less';
 
 export default class ArticleList extends PureComponent {
-
   handelClick = (name, index) => {
     console.log(name + index);
   }
@@ -12,23 +13,26 @@ export default class ArticleList extends PureComponent {
   render() {
     const { dataSource } = this.props;
     return (
-      <div className={styles.list}>
+      <Menu className={styles.list}>
         {
           dataSource.map((item, index) => {
             return (
-              <div
+              <Menu.Item
                 key={`${item.name}`}
                 className={styles.item}
                 onClick={() => this.handelClick(item.name, index)}
               >
-                <h3>{item.name}</h3>
-                <span>{item.tags.map(tag => <Tag key={`${item.name}${tag}`} color="green">{tag}</Tag>)}</span>
-
-              </div>
+                <div>
+                  <h3>{item.name}</h3>
+                  <EditableTagGroup
+                    dataSource={item.tags}
+                  />
+                </div>
+              </Menu.Item>
             );
           })
         }
-      </div>
+      </Menu>
     );
   }
 }
