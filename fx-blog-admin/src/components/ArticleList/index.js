@@ -26,6 +26,8 @@ export default class ArticleList extends PureComponent {
               className={styles.icon}
             />
             <EditableTagGroup
+              removeTag={this.props.removeTag(record.key)}
+              addTag={this.props.addTag(record.key)}
               dataSource={text.tags}
             />
           </span>
@@ -43,52 +45,12 @@ export default class ArticleList extends PureComponent {
         );
       },
     }];
-
-    this.state = {
-      dataSource: [{
-        key: 0,
-        name: 'Edward King 0',
-        tags: ['32'],
-      }],
-      count: 1,
-      options: [{
-        value: 'zhejiang',
-        label: 'java',
-        children: [{
-          value: 'hangzhou',
-          label: 'spring',
-          children: [{
-            value: 'xihu',
-            label: 'jpa',
-          }],
-        }],
-      }, {
-        value: 'jiangsu',
-        label: 'spring',
-        children: [{
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [{
-            value: 'zhonghuamen',
-            label: 'jpa',
-          }],
-        }],
-      }],
-    };
   }
   onCellChange = (key, dataIndex) => {
-    return (value) => {
-      const dataSource = [...this.state.dataSource];
-      const target = dataSource.find(item => item.key === key);
-      if (target) {
-        target[dataIndex] = value;
-        this.setState({ dataSource });
-      }
-    };
+    this.props.onCellChange(key, dataIndex);
   }
   onDelete = (key) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+    this.props.onDelete(key);
   }
 
   onChange = (value) => {
@@ -96,20 +58,11 @@ export default class ArticleList extends PureComponent {
   }
 
   handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      name: `Edward King${count}`,
-      tags: ['32'],
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
+    this.props.handleAdd();
   }
 
   render() {
-    const { dataSource, options } = this.state;
+    const { dataSource, categories } = this.props;
     const { columns } = this;
     return (
       <div className={styles.list}>
@@ -126,7 +79,7 @@ export default class ArticleList extends PureComponent {
         </Button>
         <div className={styles.select}>
           <Cascader
-            options={options}
+            options={categories}
             onChange={this.onChange}
             changeOnSelect
           />

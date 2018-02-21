@@ -20,6 +20,7 @@ export default class EditableTagGroup extends PureComponent {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     console.log(tags);
     this.setState({ tags });
+    this.props.removeTag(tags);
   }
 
   showInput = () => {
@@ -43,6 +44,7 @@ export default class EditableTagGroup extends PureComponent {
       inputVisible: false,
       inputValue: '',
     });
+    this.props.addTag(tags);
   }
 
   saveInputRef = (input) => {
