@@ -6,6 +6,7 @@ import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
 import cn.fanhub.fxblogui.model.Result;
+import cn.fanhub.fxblogui.model.WriteArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -116,6 +117,12 @@ public class ArticleController {
     @GetMapping("/total/num")
     public Result<Long> getTotalArticle() {
         return Result.of(articleManger.getArticleCount());
+    }
+
+
+    @GetMapping("/admin/categories/{categoriesNames}")
+    public Result<List<WriteArticleVO>> getWriteArticleVO(@PathVariable List<String> categoriesNames) {
+        return Result.of(articleManger.getWriteArticleVO(categoriesNames));
     }
 
     /**

@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class Discuss extends BaseEntity{
+public class Discuss extends BaseEntity {
 
     private String author;
 

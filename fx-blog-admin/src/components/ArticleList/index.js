@@ -54,7 +54,7 @@ export default class ArticleList extends PureComponent {
   }
 
   onChange = (value) => {
-    console.log(value);
+    this.props.onSelectCategories(value);
   }
 
   handleAdd = () => {

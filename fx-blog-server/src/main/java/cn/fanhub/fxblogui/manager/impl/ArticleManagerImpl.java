@@ -7,9 +7,11 @@ import cn.fanhub.fxblogui.manager.ArticleManger;
 import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
+import cn.fanhub.fxblogui.model.WriteArticleVO;
 import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.CategoriesService;
 import cn.fanhub.fxblogui.service.TagService;
+import cn.fanhub.fxblogui.util.CategoriesUtils;
 import cn.fanhub.fxblogui.util.IdUtil;
 import cn.fanhub.fxblogui.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,16 +65,23 @@ public class ArticleManagerImpl implements ArticleManger {
                         })
                         .collect(Collectors.toList())
         );
-        categoriesService.save(
-                article.getCategories()
-                        .stream()
-                        .peek(categories -> {
-                            List<Long> list = categories.getArticles();
-                            list.add(articleId);
-                            categories.setArticleNum(list.size());
-                        })
-                        .collect(Collectors.toList())
-        );
+        Categories categories = article.getCategories();
+        Categories temp = article.getCategories();
+        while (!temp.getChildren().isEmpty()) {
+            temp.setArticleNum(temp.getArticleNum() + 1);
+            temp = temp.getChildren().get(0);
+        }
+        temp.getArticles().add(articleId);
+        temp.setArticleNum(temp.getArticleNum() + 1);
+
+        Categories categoriesDb = categoriesService.getByName(categories.getName());
+        if (categoriesDb != null) {
+            CategoriesUtils.insert(categories, categoriesDb);
+            categoriesService.update(categoriesDb);
+        } else {
+            categoriesService.save(categories);
+        }
+
         return articleService.save(article);
     }
 
@@ -230,5 +239,14 @@ public class ArticleManagerImpl implements ArticleManger {
                 .convertVisitTop(articleService.getVisitNumTop(5))
                 .convertTags(tagService.getAllTagName());
 
+    }
+
+    @Override
+    public List<WriteArticleVO> getWriteArticleVO(List<String> categoriesName) {
+        Categories categories = categoriesService.getByName(categoriesName.get(0));
+        List<Article> articles = articleService.getNameAndTagsByIds(CategoriesUtils.getDeepCategories(categories, categoriesName).getArticles());
+        return articles.stream()
+                .map(WriteArticleVO::resolve)
+                .collect(Collectors.toList());
     }
 }

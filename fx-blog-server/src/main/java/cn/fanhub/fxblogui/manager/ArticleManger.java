@@ -4,6 +4,7 @@ import cn.fanhub.fxblogui.entity.Article;
 import cn.fanhub.fxblogui.model.AllCardInfoVO;
 import cn.fanhub.fxblogui.model.ArticleDetailVO;
 import cn.fanhub.fxblogui.model.ArticleDigestVO;
+import cn.fanhub.fxblogui.model.WriteArticleVO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -107,4 +108,6 @@ public interface ArticleManger {
      * @return the all card info
      */
     AllCardInfoVO getAllCardInfo();
+
+    List<WriteArticleVO> getWriteArticleVO(List<String> categoriesName);
 }

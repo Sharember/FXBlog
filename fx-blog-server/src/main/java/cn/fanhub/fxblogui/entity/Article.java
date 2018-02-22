@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class Article extends BaseEntity{
+public class Article extends BaseEntity {
 
     private String name;
 
@@ -30,7 +30,7 @@ public class Article extends BaseEntity{
     private String firstImgUrl;
 
     @DBRef
-    private List<Categories> categories = new ArrayList<>();
+    private Categories categories;
 
     @DBRef
     private List<Tag> tags = new ArrayList<>();

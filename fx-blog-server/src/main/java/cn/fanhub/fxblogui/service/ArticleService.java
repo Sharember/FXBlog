@@ -10,7 +10,7 @@ import java.util.List;
  * @author chengfan
  * @date 2018-2-8 22:18:40
  */
-public interface ArticleService extends BaseService<Article, Long>{
+public interface ArticleService extends BaseService<Article, Long> {
     /**
      * Gets page.
      *
@@ -50,4 +50,12 @@ public interface ArticleService extends BaseService<Article, Long>{
      * @return the correlation top
      */
     List<Article> getCorrelationTop(int topNum);
+
+    /**
+     * Gets name and tags by ids.
+     *
+     * @param ids the ids
+     * @return the name and tags by ids
+     */
+    List<Article> getNameAndTagsByIds(List<Long> ids);
 }

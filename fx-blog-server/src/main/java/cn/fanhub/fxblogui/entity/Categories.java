@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class Categories extends BaseEntity{
+public class Categories extends BaseEntity {
 
     private String author;
 
@@ -21,4 +21,6 @@ public class Categories extends BaseEntity{
     private int articleNum;
 
     private List<Long> articles = new ArrayList<>();
+
+    private List<Categories> children = new ArrayList<>();
 }

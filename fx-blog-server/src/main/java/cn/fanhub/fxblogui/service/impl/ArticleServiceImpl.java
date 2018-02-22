@@ -1,6 +1,7 @@
 package cn.fanhub.fxblogui.service.impl;
 
 import cn.fanhub.fxblogui.entity.Article;
+import cn.fanhub.fxblogui.repository.ArticleRepository;
 import cn.fanhub.fxblogui.service.ArticleService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -27,6 +28,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implement
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private ArticleRepository articleRepository;
 
     /**
      * Gets page.
@@ -121,5 +125,16 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implement
         query.with(new Sort(new Order(Direction.ASC, "")));
         query.limit(topNum);
         return this.mongoTemplate.find(query, Article.class);
+    }
+
+    /**
+     * Gets name and tags by ids.
+     *
+     * @param ids the ids
+     * @return the name and tags by ids
+     */
+    @Override
+    public List<Article> getNameAndTagsByIds(List<Long> ids) {
+        return articleRepository.findNameAndTagsByIds(ids);
     }
 }

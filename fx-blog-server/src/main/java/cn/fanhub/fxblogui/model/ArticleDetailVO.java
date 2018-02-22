@@ -30,7 +30,7 @@ public class ArticleDetailVO {
 
     private String createTime;
 
-    private List<Categories> categories = new ArrayList<>();
+    private Categories categories;
 
     private List<Tag> tags = new ArrayList<>();
 

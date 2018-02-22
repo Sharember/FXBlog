@@ -18,7 +18,6 @@ export default class EditableTagGroup extends PureComponent {
 
   handleClose = (removedTag) => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
-    console.log(tags);
     this.setState({ tags });
     this.props.removeTag(tags);
   }
@@ -38,7 +37,6 @@ export default class EditableTagGroup extends PureComponent {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
-    console.log(tags);
     this.setState({
       tags,
       inputVisible: false,

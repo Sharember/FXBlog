@@ -41,7 +41,7 @@ export default class EditableCell extends PureComponent {
             </div>
           ) : (
             <div className={styles.editableCellTextWrapper}>
-              {value || ' '}
+              {<span style={{ fontSize: '20px', fontWeight: 'bold' }}>{value}</span> || ' '}
               <Icon
                 type="edit"
                 className={styles.editableCellIcon}

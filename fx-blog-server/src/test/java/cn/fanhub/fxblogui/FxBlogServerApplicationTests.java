@@ -7,6 +7,7 @@ import cn.fanhub.fxblogui.entity.Menu;
 import cn.fanhub.fxblogui.entity.Tag;
 import cn.fanhub.fxblogui.manager.ArticleManger;
 import cn.fanhub.fxblogui.repository.ArticleRepository;
+import cn.fanhub.fxblogui.repository.CategoriesRepository;
 import cn.fanhub.fxblogui.service.ArticleService;
 import cn.fanhub.fxblogui.service.MenuService;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,6 +34,10 @@ public class FxBlogServerApplicationTests {
 
 	@Autowired
 	private ArticleRepository articleRepository;
+
+	@Autowired
+	private CategoriesRepository categoriesRepository;
+
 
 	@Test
 	public void testMenu() {
@@ -69,8 +75,16 @@ public class FxBlogServerApplicationTests {
 		tag2.setName("java");
 		Categories categories = new Categories();
 		categories.setName("java");
+
 		Categories categories2 = new Categories();
 		categories2.setName("spring");
+		Categories sub = new Categories();
+		sub.setName("aop");
+		//Categories sub2 = new Categories();
+		//sub2.setName("ioc");
+
+		categories2.setChildren(Collections.singletonList(sub));
+
 		Discuss discuss = new Discuss();
 		discuss.setContent("hhh");
 		discuss.setIp("localhost");
@@ -79,7 +93,7 @@ public class FxBlogServerApplicationTests {
 
 			article.setName("test" + i);
 			article.setTags(Arrays.asList(tag, tag2));
-			article.setCategories(Arrays.asList(categories, categories2));
+			article.setCategories(categories2);
 			article.setDiscusses(Collections.singletonList(discuss));
 			article.setUrl("/test" + i);
 			article.setVisitNum(10);
@@ -383,11 +397,12 @@ public class FxBlogServerApplicationTests {
 
 	@Test
 	public void testMongo () {
-		//System.out.println(articleRepository.getNameById(1L).getName());
+		List<Article> byIds = articleRepository.findNameAndTagsByIds(Arrays.asList(1L, 2L));
+		System.out.println();
 
-		for (Article article : articleService.getCreateTimeTop(5)) {
-			System.out.println(article.getName());
-		}
+		//for (Article article : articleService.getCreateTimeTop(5)) {
+		//	System.out.println(article.getName());
+		//}
 	}
 
 }

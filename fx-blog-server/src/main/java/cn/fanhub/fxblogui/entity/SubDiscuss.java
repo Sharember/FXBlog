@@ -9,7 +9,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class SubDiscuss extends BaseEntity{
+public class SubDiscuss extends BaseEntity {
 
     private String author;
 
