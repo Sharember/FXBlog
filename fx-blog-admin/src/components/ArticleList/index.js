@@ -39,9 +39,12 @@ export default class ArticleList extends PureComponent {
       colSpan: 0,
       render: (text, record) => {
         return (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record.key)}>
-            <a href="#"><Icon type="delete" /></a>
-          </Popconfirm>
+          <div>
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record.key)}>
+              <a href="#"><Icon type="delete" /></a>
+            </Popconfirm>
+            <Icon type="save" onClick={this.props.onSave} />
+          </div>
         );
       },
     }];
@@ -70,6 +73,14 @@ export default class ArticleList extends PureComponent {
           pagination={false}
           dataSource={dataSource}
           columns={columns}
+          onRow={(column) => {
+            return {
+              onClick: () => {
+                this.props.onClick(column);
+              },
+              onMouseEnter: () => {},
+            };
+          }}
           scroll={{ y: '73vh' }}
         />
         <Button

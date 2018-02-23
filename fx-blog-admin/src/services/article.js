@@ -12,3 +12,14 @@ export async function updateTags(payload) {
     body: { ...payload },
   });
 }
+export async function queryArticleContent(name) {
+  return request(`${base}/article/name/${name}`);
+}
+
+export async function saveContent(payload) {
+  return request(`${base}/article/content`, {
+    method: 'PUT',
+    body: { ...payload },
+  });
+}
+

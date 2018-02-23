@@ -16,6 +16,7 @@ public class WriteArticleVO {
     private long key;
 
     public static WriteArticleVO resolveTag(Article article) {
+        article.getTags().remove(null);
         WriteArticleVO writeArticleVO = new WriteArticleVO();
         writeArticleVO.setName(article.getName());
         writeArticleVO.setTags(article.getTags().stream().map(Tag::getName).collect(Collectors.toList()));

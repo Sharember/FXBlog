@@ -34,7 +34,6 @@ const View = ({ content }) => (
 
 export default class Editor extends PureComponent {
   state = {
-    content: '',
     mode: 'split',
     isFullScreen: false,
   }
@@ -42,17 +41,6 @@ export default class Editor extends PureComponent {
     // // cache dom node
     // this.textControl = ReactDOM.findDOMNode(this.refs.editor);
     // this.previewControl = ReactDOM.findDOMNode(this.refs.preview);
-  }
-
-  componentWillUnmount() {
-    this.textControl = null;
-    this.previewControl = null;
-  }
-
-  onChange = (e) => {
-    this.setState({
-      content: e.target.value,
-    });
   }
 
   edit = () => {
@@ -86,13 +74,13 @@ export default class Editor extends PureComponent {
             <TextArea
               rows={100}
               autosize={{ minRows: 31 }}
-              value={this.state.content}
-              onChange={this.onChange}
+              value={this.props.dataSource}
+              onChange={this.props.onEditorChange}
             />
           </div>
           <div span={12} className={`${styles.mdPreview} ${this.state.mode === 'preview' ? styles.expand : ' '} ${this.state.mode === 'edit' ? styles.shrink : ' '}`}>
             <View
-              content={this.state.content}
+              content={this.props.dataSource}
             />
           </div>
         </Row>
