@@ -29,8 +29,7 @@ public class Article extends BaseEntity {
 
     private String firstImgUrl;
 
-    @DBRef
-    private Categories categories;
+    private List<String> categories;
 
     @DBRef
     private List<Tag> tags = new ArrayList<>();

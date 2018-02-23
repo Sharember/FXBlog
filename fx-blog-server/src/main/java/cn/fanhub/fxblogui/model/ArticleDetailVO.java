@@ -1,7 +1,6 @@
 package cn.fanhub.fxblogui.model;
 
 import cn.fanhub.fxblogui.entity.Article;
-import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Tag;
 import lombok.Data;
 import lombok.ToString;
@@ -30,7 +29,7 @@ public class ArticleDetailVO {
 
     private String createTime;
 
-    private Categories categories;
+    private List<String> categories;
 
     private List<Tag> tags = new ArrayList<>();
 

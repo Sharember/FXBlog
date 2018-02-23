@@ -70,6 +70,7 @@ export default class ArticleList extends PureComponent {
           pagination={false}
           dataSource={dataSource}
           columns={columns}
+          scroll={{ y: '73vh' }}
         />
         <Button
           onClick={this.handleAdd}

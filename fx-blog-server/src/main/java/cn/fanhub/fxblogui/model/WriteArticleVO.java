@@ -1,7 +1,6 @@
 package cn.fanhub.fxblogui.model;
 
 import cn.fanhub.fxblogui.entity.Article;
-import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Tag;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 public class WriteArticleVO {
     private String name;
     private List<String> tags;
-    private Categories categories;
+    private List<String> categories;
     private String content;
     private long key;
 

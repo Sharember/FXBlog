@@ -1,7 +1,6 @@
 package cn.fanhub.fxblogui;
 
 import cn.fanhub.fxblogui.entity.Article;
-import cn.fanhub.fxblogui.entity.Categories;
 import cn.fanhub.fxblogui.entity.Discuss;
 import cn.fanhub.fxblogui.entity.Menu;
 import cn.fanhub.fxblogui.entity.Tag;
@@ -72,17 +71,17 @@ public class FxBlogServerApplicationTests {
 		tag.setName("study");
 		Tag tag2 = new Tag();
 		tag2.setName("java");
-		Categories categories = new Categories();
-		categories.setName("java");
-
-		Categories categories2 = new Categories();
-		categories2.setName("spring");
-		Categories sub = new Categories();
-		sub.setName("aop");
-		//Categories sub2 = new Categories();
-		//sub2.setName("ioc");
-
-		categories2.setChildren(Collections.singletonList(sub));
+		//Categories categories = new Categories();
+		//categories.setName("java");
+        //
+		//Categories categories2 = new Categories();
+		//categories2.setName("spring");
+		//Categories sub = new Categories();
+		//sub.setName("aop");
+		////Categories sub2 = new Categories();
+		////sub2.setName("ioc");
+        //
+		//categories2.setChildren(Collections.singletonList(sub));
 
 		Discuss discuss = new Discuss();
 		discuss.setContent("hhh");
@@ -92,7 +91,7 @@ public class FxBlogServerApplicationTests {
 
 			article.setName("test" + i);
 			article.setTags(Arrays.asList(tag, tag2));
-			article.setCategories(categories2);
+			article.setCategories(Arrays.asList("spring", "aop"));
 			article.setDiscusses(Collections.singletonList(discuss));
 			article.setUrl("/test" + i);
 			article.setVisitNum(10);

@@ -65,14 +65,7 @@ public class ArticleManagerImpl implements ArticleManger {
                         })
                         .collect(Collectors.toList())
         );
-        Categories categories = article.getCategories();
-        Categories temp = article.getCategories();
-        while (!temp.getChildren().isEmpty()) {
-            temp.setArticleNum(temp.getArticleNum() + 1);
-            temp = temp.getChildren().get(0);
-        }
-        temp.getArticles().add(articleId);
-        temp.setArticleNum(temp.getArticleNum() + 1);
+        Categories categories = CategoriesUtils.convert(article.getCategories(), articleId);
 
         Categories categoriesDb = categoriesService.getByName(categories.getName());
         if (categoriesDb != null) {
@@ -107,7 +100,7 @@ public class ArticleManagerImpl implements ArticleManger {
 
     /**
      * Gets by categories name.
-     *
+     * todo categoriesName 现在是 list
      * @param categoriesName the categories name
      * @return the by categories name
      */
