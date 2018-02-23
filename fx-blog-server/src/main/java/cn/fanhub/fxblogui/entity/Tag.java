@@ -21,4 +21,11 @@ public class Tag extends BaseEntity {
     private int articleNum;
 
     private List<Long> articles = new ArrayList<>();
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
+    public Tag() {
+    }
 }

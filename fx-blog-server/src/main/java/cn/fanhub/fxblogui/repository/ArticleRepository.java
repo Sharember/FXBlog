@@ -39,6 +39,6 @@ public interface ArticleRepository extends BaseRepository<Article, Long> {
     @Query(value = "{_id: { $in: ?0}}", fields = "{name: 1, tags: 1}")
     List<Article> findNameAndTagsByIds(List<Long> ids);
 
-
-
+    @Query(value = "{_id: ?0}", fields = "{content: -1}")
+    Article getExceptContent(Long id);
 }

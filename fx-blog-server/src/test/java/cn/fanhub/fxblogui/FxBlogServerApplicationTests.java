@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -397,12 +396,22 @@ public class FxBlogServerApplicationTests {
 
 	@Test
 	public void testMongo () {
-		List<Article> byIds = articleRepository.findNameAndTagsByIds(Arrays.asList(1L, 2L));
-		System.out.println();
+		//List<Article> byIds = articleRepository.findNameAndTagsByIds(Arrays.asList(1L, 2L));
+		//System.out.println();
 
 		//for (Article article : articleService.getCreateTimeTop(5)) {
 		//	System.out.println(article.getName());
 		//}
+
+		Article article = new Article();
+
+		article.setName("testtest");
+		article.setId(4);
+		Tag tag2 = new Tag();
+		tag2.setName("hhhhhhhh");
+		article.getTags().add(tag2);
+
+		articleManger.updateTags(article);
 	}
 
 }

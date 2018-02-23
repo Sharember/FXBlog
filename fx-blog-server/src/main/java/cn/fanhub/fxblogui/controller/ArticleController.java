@@ -136,6 +136,28 @@ public class ArticleController {
         return Result.of(articleManger.update(article));
     }
 
+    @PutMapping("/tags")
+    public Result updateTags(@RequestBody WriteArticleVO articleVO) {
+        Article article = WriteArticleVO.reverseTag(articleVO);
+        articleManger.updateTags(article);
+        return Result.success();
+    }
+
+    @PutMapping("/categories")
+    public Result updateCategories(@RequestBody WriteArticleVO articleVO) {
+        Article article = WriteArticleVO.reverseCategories(articleVO);
+        articleManger.updateCategories(article);
+        return Result.success();
+    }
+
+    @PutMapping("/content")
+    public Result updateContent(@RequestBody WriteArticleVO articleVO) {
+        Article article = WriteArticleVO.reverseContent(articleVO);
+        articleManger.updateContent(article);
+        return Result.success();
+    }
+
+
     /**
      * Add result.
      *

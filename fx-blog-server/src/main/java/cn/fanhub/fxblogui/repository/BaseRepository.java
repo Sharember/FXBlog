@@ -57,6 +57,7 @@ public interface BaseRepository<M, ID extends Serializable> extends PagingAndSor
      */
     <S extends M> List<S> save(Iterable<S> iterable);
 
+
     /**
      * Gets by name.
      *

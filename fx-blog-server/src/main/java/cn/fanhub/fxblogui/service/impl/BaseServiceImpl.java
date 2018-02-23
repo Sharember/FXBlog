@@ -4,6 +4,7 @@ import cn.fanhub.fxblogui.repository.BaseRepository;
 import cn.fanhub.fxblogui.service.BaseService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,9 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
 
     @Autowired
     protected BaseRepository<T, ID> baseRepository;
+
+    @Autowired
+    protected MongoTemplate mongoTemplate;
 
     /**
      * Save t.

@@ -110,4 +110,11 @@ public interface ArticleManger {
     AllCardInfoVO getAllCardInfo();
 
     List<WriteArticleVO> getWriteArticleVO(List<String> categoriesName);
+
+
+    void updateTags(Article article);
+
+    void updateCategories(Article article);
+
+    void updateContent(Article article);
 }

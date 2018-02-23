@@ -13,7 +13,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,63 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implement
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Override
+    public Article update(Article article) {
+        Query query=new Query(Criteria.where("id").is(article.getId()));
+        Update update= new Update();
+        if (article.getName() != null) {
+            update.set("name", article.getName());
+        }
+        if (article.getVisitNum() != 0) {
+            update.set("visitNum", article.getVisitNum());
+        }
+        if (article.getLikeNum() != 0) {
+            update.set("likeNum", article.getLikeNum());
+        }
+        if (article.getDigest() != null) {
+            update.set("digest", article.getDigest());
+        }
+        if (article.getFirstImgUrl() != null) {
+            update.set("firstImgUrl", article.getFirstImgUrl());
+        }
+        if (article.getUrl() != null) {
+            update.set("url", article.getUrl());
+        }
+        //更新查询返回结果集的第一条
+        mongoTemplate.updateFirst(query, update, Article.class);
+        return null;
+    }
+
+    @Override
+    public void updateCategories(Article article) {
+        Query query=new Query(Criteria.where("id").is(article.getId()));
+        Update update= new Update().set("categories", article.getCategories());
+        //更新查询返回结果集的第一条
+        mongoTemplate.updateFirst(query, update, Article.class);
+
+    }
+
+    @Override
+    public void updateTags(Article article) {
+        Query query=new Query(Criteria.where("id").is(article.getId()));
+        Update update= new Update().set("tags", article.getTags());
+        //更新查询返回结果集的第一条
+        mongoTemplate.updateFirst(query, update, Article.class);
+    }
+
+    @Override
+    public void updateContent(Article article) {
+        Query query=new Query(Criteria.where("id").is(article.getId()));
+        Update update= new Update().set("content", article.getContent());
+        //更新查询返回结果集的第一条
+        mongoTemplate.updateFirst(query, update, Article.class);
+    }
+
+    @Override
+    public Article getExceptContent(long id) {
+        return articleRepository.getExceptContent(id);
+    }
 
     /**
      * Gets page.

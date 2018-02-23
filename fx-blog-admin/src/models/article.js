@@ -1,4 +1,4 @@
-import { queryArticleListByCategories } from '../services/article';
+import { queryArticleListByCategories, updateTags } from '../services/article';
 
 export default {
   namespace: 'article',
@@ -9,13 +9,15 @@ export default {
   effects: {
     *fetchArticleListByCategories({ payload }, { call, put }) {
       const response = yield call(queryArticleListByCategories, payload);
-      console.log(response);
       if (response.success) {
         yield put({
           type: 'updateState',
           articleListForNew: response.value,
         });
       }
+    },
+    *updateTags({ payload }, { call }) {
+      yield call(updateTags, payload);
     },
     *updateStateEff({ payload }, { put }) {
       yield put({

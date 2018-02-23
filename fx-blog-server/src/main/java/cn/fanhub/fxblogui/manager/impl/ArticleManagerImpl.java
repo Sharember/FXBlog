@@ -154,7 +154,6 @@ public class ArticleManagerImpl implements ArticleManger {
      */
     @Override
     public Article update(Article article) {
-        // todo tag 修改等
         return articleService.update(article);
     }
 
@@ -246,7 +245,33 @@ public class ArticleManagerImpl implements ArticleManger {
         Categories categories = categoriesService.getByName(categoriesName.get(0));
         List<Article> articles = articleService.getNameAndTagsByIds(CategoriesUtils.getDeepCategories(categories, categoriesName).getArticles());
         return articles.stream()
-                .map(WriteArticleVO::resolve)
+                .map(WriteArticleVO::resolveTag)
                 .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public void updateTags(Article article) {
+        // tag 如果有新增的
+        article.getTags().forEach(tag ->{
+            if (tagService.getByName(tag.getName()) == null) {
+                tag.getArticles().add(article.getId());
+                tag.setArticleNum(1);
+                tagService.save(tag);
+            }
+        });
+        articleService.updateTags(article);
+
+    }
+
+    @Override
+    public void updateCategories(Article article) {
+        // todo
+        articleService.updateCategories(article);
+    }
+
+    @Override
+    public void updateContent(Article article) {
+        articleService.updateContent(article);
     }
 }

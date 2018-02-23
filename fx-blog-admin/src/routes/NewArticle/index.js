@@ -60,6 +60,13 @@ export default class TriggerException extends Component {
       if (target) {
         target.tags = tags;
         this.updateStateEff(dataSource);
+        this.props.dispatch({
+          type: 'article/updateTags',
+          payload: {
+            key,
+            tags,
+          },
+        });
       }
     };
   }
@@ -80,10 +87,12 @@ export default class TriggerException extends Component {
       const target = dataSource.find(item => item.key === key);
       if (target) {
         target.tags = tags;
+        this.updateStateEff(dataSource);
         this.props.dispatch({
-          type: 'article/updateStateEff',
+          type: 'article/updateTags',
           payload: {
-            articleListForNew: dataSource,
+            key,
+            tags,
           },
         });
       }

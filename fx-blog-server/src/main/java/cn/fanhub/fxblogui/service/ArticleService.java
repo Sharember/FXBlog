@@ -58,4 +58,13 @@ public interface ArticleService extends BaseService<Article, Long> {
      * @return the name and tags by ids
      */
     List<Article> getNameAndTagsByIds(List<Long> ids);
+
+    void updateCategories(Article article);
+
+    void updateTags(Article article);
+
+    void updateContent(Article article);
+
+    Article getExceptContent(long id);
+
 }
